@@ -1,0 +1,55 @@
+{
+  "spark": [
+    {
+      "name": "Levels",
+      "sloc": [
+        {
+          "file": "levels.ads",
+          "line": 1
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Levels.P1",
+      "sloc": [
+        {
+          "file": "levels.ads",
+          "line": 4
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+    {
+      "file": "levels.ads",
+      "line": 5,
+      "col": 24,
+      "rule": "DEPENDS_WRONG",
+      "severity": "medium",
+      "entity": {
+        "name": "Levels.P1",
+        "sloc": [
+          {
+            "file": "levels.ads",
+            "line": 4
+          }
+        ]
+      },
+      "check_tree": {
+      },
+      "msg_id": 0,
+      "how_proved": "flow"
+    }
+  ],
+  "assumptions": [
+  ],
+  "timings": {
+    "globals (advanced)": 3.41400009347126E-04,
+    "flow analysis": 1.02399999741465E-03,
+    "marking": 9.05999986571260E-05,
+    "properties (advanced)": 1.46000002132496E-05,
+    "globals (basic)": 3.55700001819059E-04
+  }
+}

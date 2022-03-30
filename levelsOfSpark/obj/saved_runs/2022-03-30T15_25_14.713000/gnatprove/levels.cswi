@@ -1,0 +1,7 @@
+20220330142502
+-c
+-x
+ada
+-gnatA
+-gnatc
+-gnates=C:\GNAT\Practicals\levelsOfSpark\obj\gnatprove\c6f36a14.tmp
