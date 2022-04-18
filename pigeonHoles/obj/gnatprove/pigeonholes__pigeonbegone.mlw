@@ -1,0 +1,663 @@
+module Pigeonholes__box
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type box
+  
+  val function first : int
+    ensures { result = (0 : int) }
+  
+  val function last : int
+    ensures { result = (1 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = box,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type box__ref = { mutable box__content : box }
+  
+  function box__ref_box__content__projection (a: box__ref) : box =
+    a.box__content
+  
+  meta "model_projection" function box__ref_box__content__projection
+  
+  meta "inline:no" function box__ref_box__content__projection
+  
+  val box__havoc (x: box__ref) : unit
+    writes { x }
+end
+
+module Pigeonholes__box__rep
+  use Pigeonholes__box as Pigeonholes__box
+  use _gnatprove_standard.Main
+  use int.Int
+  clone export ada__model.Rep_Proj_Int with
+    axiom .,
+    type t = Pigeonholes__box.box,
+    predicate in_range = Pigeonholes__box.in_range
+  
+  meta "model_projection" function to_rep
+  
+  meta "inline:no" function to_rep
+end
+
+module Array__Int__Pigeonholes__box
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__box as Pigeonholes__box
+  use Pigeonholes__box__rep as Pigeonholes__box__rep
+  
+  function index_I1_one : int = 1 : int
+  
+  type component_type = Pigeonholes__box.box
+  
+  clone export _gnatprove_standard.Array__1 with
+    axiom .,
+    type I1.t = int,
+    predicate I1.le = Int.( <= ),
+    predicate I1.lt = Int.( < ),
+    predicate I1.gt = Int.( > ),
+    function I1.add = Int.( + ),
+    function I1.sub = Int.( - ),
+    function I1.one = index_I1_one,
+    type component_type = component_type
+  
+  function bool_eq (a: map) (a__first: int) (a__last: int) (b: map) (b__first: int) (b__last: int) : bool =
+    ((if (a__first <= a__last) then
+        ((b__first <= b__last) /\
+           ((a__last - a__first) = (b__last - b__first)))
+      else (b__first > b__last)) /\
+       (forall temp___idx_161 : int.
+          if ((a__first <= temp___idx_161) /\ (temp___idx_161 <= a__last)) then
+            ((Pigeonholes__box__rep.to_rep ((get a) temp___idx_161))
+               = (Pigeonholes__box__rep.to_rep
+                    ((get b) ((b__first - a__first) + temp___idx_161))))
+          else true))
+  
+  val bool_eq (a: map) (a__first: int) (a__last: int) (b: map) (b__first: int) (b__last: int) : 
+    bool
+    ensures { result
+      =
+      ((((((bool_eq (a : map)) (a__first : int)) (a__last : int)) (b : map))
+          (b__first : int))
+         (b__last : int)) }
+  
+  axiom bool_eq_rev:
+    forall a : map, b : map.
+      forall a__first : int, a__last : int, b__first : int, b__last : int.
+        ((((((((bool_eq b) b__first) b__last) a) a__first) a__last) = True) ->
+           ((if (a__first <= a__last) then
+               ((b__first <= b__last) /\
+                  ((a__last - a__first) = (b__last - b__first)))
+             else (b__first > b__last)) /\
+              (forall temp___idx_161 : int.
+                 if ((a__first <= temp___idx_161) /\
+                       (temp___idx_161 <= a__last)) then
+                   ((Pigeonholes__box__rep.to_rep ((get a) temp___idx_161))
+                      = (Pigeonholes__box__rep.to_rep
+                           ((get b) ((b__first - a__first) + temp___idx_161))))
+                 else true)))
+end
+
+module Pigeonholes__pigeonbegone__d
+  use _gnatprove_standard.Main
+  use int.Int
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  
+  val d : Array__Int__Pigeonholes__box.map__ref
+end
+
+module Pigeonholes__pigeonbegone__pos
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val pos : int__ref
+end
+
+module Pigeonholes__ph_index
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type ph_index = <range 1 5>
+  
+  val function first : int
+    ensures { result = (1 : int) }
+  
+  val function last : int
+    ensures { result = (5 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = ph_index,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type ph_index__ref = { mutable ph_index__content : ph_index }
+  
+  function ph_index__ref_ph_index__content__projection (a: ph_index__ref) : ph_index =
+    a.ph_index__content
+  
+  meta "model_projection" function ph_index__ref_ph_index__content__projection
+  
+  meta "inline:no" function ph_index__ref_ph_index__content__projection
+  
+  val ph_index__havoc (x: ph_index__ref) : unit
+    writes { x }
+end
+
+module Pigeonholes__ph_index___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__ph_index as Pigeonholes__ph_index
+  
+  predicate dynamic_invariant (temp___expr_174: int) (temp___is_init_170: bool) (temp___skip_constant_171: bool) (temp___do_toplevel_172: bool) (temp___do_typ_inv_173: bool) =
+    if ((temp___is_init_170 = True) \/
+          (Pigeonholes__ph_index.first <= Pigeonholes__ph_index.last)) then
+      (((Pigeonholes__ph_index.dynamic_property Pigeonholes__ph_index.first)
+          Pigeonholes__ph_index.last)
+         temp___expr_174)
+    else true
+  
+  val dynamic_invariant (temp___expr_174: int) (temp___is_init_170: bool) (temp___skip_constant_171: bool) (temp___do_toplevel_172: bool) (temp___do_typ_inv_173: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_174 : int))
+                      (temp___is_init_170 : bool))
+                     (temp___skip_constant_171 : bool))
+                    (temp___do_toplevel_172 : bool))
+                   (temp___do_typ_inv_173 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_175: int) (temp___skip_top_level_176: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_175: int) (temp___skip_top_level_176: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_175 : int))
+                   (temp___skip_top_level_176 : bool)) }
+end
+
+module Pigeonholes__pigeonhole___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  
+  predicate dynamic_invariant (temp___expr_181: Array__Int__Pigeonholes__box.map) (temp___is_init_177: bool) (temp___skip_constant_178: bool) (temp___do_toplevel_179: bool) (temp___do_typ_inv_180: bool) =
+    true
+  
+  val dynamic_invariant (temp___expr_181: Array__Int__Pigeonholes__box.map) (temp___is_init_177: bool) (temp___skip_constant_178: bool) (temp___do_toplevel_179: bool) (temp___do_typ_inv_180: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant
+                       (temp___expr_181 : Array__Int__Pigeonholes__box.map))
+                      (temp___is_init_177 : bool))
+                     (temp___skip_constant_178 : bool))
+                    (temp___do_toplevel_179 : bool))
+                   (temp___do_typ_inv_180 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_183: Array__Int__Pigeonholes__box.map) (temp___skip_top_level_184: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_183: Array__Int__Pigeonholes__box.map) (temp___skip_top_level_184: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption
+                    (temp___expr_183 : Array__Int__Pigeonholes__box.map))
+                   (temp___skip_top_level_184 : bool)) }
+end
+
+module Pigeonholes__pigeonbegone__L_1
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  exception L_1
+end
+
+module Pigeonholes__pigeonbegone__pos___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Pigeonholes__pigeonbegone__L_1___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Pigeonholes__box___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__box as Pigeonholes__box
+  
+  predicate dynamic_invariant (temp___expr_167: int) (temp___is_init_163: bool) (temp___skip_constant_164: bool) (temp___do_toplevel_165: bool) (temp___do_typ_inv_166: bool) =
+    if ((temp___is_init_163 = True) \/
+          (Pigeonholes__box.first <= Pigeonholes__box.last)) then
+      (((Pigeonholes__box.dynamic_property Pigeonholes__box.first)
+          Pigeonholes__box.last)
+         temp___expr_167)
+    else true
+  
+  val dynamic_invariant (temp___expr_167: int) (temp___is_init_163: bool) (temp___skip_constant_164: bool) (temp___do_toplevel_165: bool) (temp___do_typ_inv_166: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_167 : int))
+                      (temp___is_init_163 : bool))
+                     (temp___skip_constant_164 : bool))
+                    (temp___do_toplevel_165 : bool))
+                   (temp___do_typ_inv_166 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_168: int) (temp___skip_top_level_169: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_168: int) (temp___skip_top_level_169: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_168 : int))
+                   (temp___skip_top_level_169 : bool)) }
+end
+
+module Pigeonholes__pigeonbegone__d___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Pigeonholes__pigeonbegone__subprogram_def
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use _gnatprove_standard.Boolean as Boolean
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Pigeonholes__pigeonbegone__d as Pigeonholes__pigeonbegone__d
+  use Pigeonholes__pigeonbegone__pos as Pigeonholes__pigeonbegone__pos
+  use Pigeonholes__box as Pigeonholes__box
+  use Pigeonholes__box__rep as Pigeonholes__box__rep
+  use Pigeonholes__ph_index as Pigeonholes__ph_index
+  use Pigeonholes__ph_index___axiom as Pigeonholes__ph_index___axiom
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Pigeonholes__pigeonhole___axiom as Pigeonholes__pigeonhole___axiom
+  use Pigeonholes__pigeonbegone__L_1 as Pigeonholes__pigeonbegone__L_1
+  use Pigeonholes__pigeonbegone__pos___axiom as Pigeonholes__pigeonbegone__pos___axiom
+  use Pigeonholes__pigeonbegone__L_1___axiom as Pigeonholes__pigeonbegone__L_1___axiom
+  use Pigeonholes__box___axiom as Pigeonholes__box___axiom
+  use Pigeonholes__ph_index___axiom as Pigeonholes__ph_index___axiom
+  use Pigeonholes__pigeonhole___axiom as Pigeonholes__pigeonhole___axiom
+  use Pigeonholes__pigeonbegone__d___axiom as Pigeonholes__pigeonbegone__d___axiom
+  
+  let def (__void_param : unit)
+    requires { [#"pigeonholes.ads" 8 0 0] true }
+    ensures { [#"pigeonholes.ads" 8 0 0]
+              [#"pigeonholes.ads" 9 0 0]
+              [@GP_Shape:pragargs__forall]
+              [@GP_Reason:VC_POSTCONDITION]
+              [@comment:     Post => (for all J in d'Range => d(J) /= Pigeon);              ^ pigeonholes.ads:9:14:VC_POSTCONDITION]
+              [@GP_Sloc:pigeonholes.ads:9:14]
+              [@model_vc_post]
+              [@GP_Id:4]
+              (forall j : int.
+                 ((((1 : int) <= j) /\ (j <= (5 : int))) ->
+                    ([@GP_Sloc:pigeonholes.ads:9:39]
+                     [@GP_Pretty_Ada:1059]
+                     ((Pigeonholes__box__rep.to_rep
+                         ((Array__Int__Pigeonholes__box.get
+                             (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+                            j))
+                        <> (0 : int))))) }
+  = [@vc:divergent]
+    (([@GNAT-comment:Assume dynamic invariants of inputs of the subprogram pigeonholes.ads:8]
+      ());
+     assume {
+       ((((Pigeonholes__pigeonhole___axiom.dynamic_invariant
+             (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+            True)
+           False)
+          True)
+         True };
+     ([@GNAT-comment:Assume moved pointers in outputs of the subprogram pigeonholes.ads:8]
+      ());
+     ([@GNAT-comment:Check for RTE in the Pre of the subprogram pigeonholes.ads:8]
+      ());
+     ([@GNAT-comment:Assume Pre of the subprogram pigeonholes.ads:8] ());
+     (try
+        ([#"pigeonholes.adb" 6 0 0]
+         (([#"pigeonholes.adb" 6 0 0]
+           (Pigeonholes__pigeonbegone__pos.pos.int__content <- (1 : int)));
+          ([#"pigeonholes.adb" 6 0 0]
+           assume {
+             [#"pigeonholes.adb" 6 0 0]
+             (((((Pigeonholes__ph_index___axiom.dynamic_invariant
+                    (Pigeonholes__pigeonbegone__pos.pos.int__content))
+                   True)
+                  False)
+                 True)
+                True) })));
+        ([#"pigeonholes.adb" 8 0 0] ());
+        ([@GP_Sloc:pigeonholes.adb:8:26]
+         [#"pigeonholes.adb" 8 0 0]
+         (([@GNAT-comment:Translation of an Ada loop from pigeonholes.adb:8]
+           ());
+          (if ((Pigeonholes__pigeonbegone__pos.pos.int__content) < (5 : int)) then
+             ([#"pigeonholes.adb" 8 0 0]
+              (try
+                 let temp___loop_entry_198 =
+                   Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content in
+                 ([@GNAT-comment:While loop translating the Ada loop from pigeonholes.adb:8]
+                  ());
+                 ([#"'@Loop 854@'pigeonholes.adb" 12 0 0]
+                  [#"'@Loop 854@'pigeonholes.adb" 12 0 0]
+                  ((([@GP_Sloc:pigeonholes.adb:9:12]
+                     [#"pigeonholes.adb" 9 0 0] ());
+                    ([@GP_Sloc:pigeonholes.adb:9:17]
+                     [#"pigeonholes.adb" 9 0 0]
+                     [#"pigeonholes.adb" 9 0 0]
+                     (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content <-
+                        (((Array__Int__Pigeonholes__box.set
+                             (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+                            (Pigeonholes__pigeonbegone__pos.pos.int__content))
+                           (Pigeonholes__box__rep.of_rep (1 : int)))));
+                    ([@GP_Sloc:pigeonholes.adb:11:10]
+                     [#"pigeonholes.adb" 11 0 0] ());
+                    ([@GP_Sloc:pigeonholes.adb:11:17]
+                     [#"pigeonholes.adb" 11 0 0] ());
+                    ([@GP_Sloc:pigeonholes.adb:11:14]
+                     [#"pigeonholes.adb" 11 0 0]
+                     [#"pigeonholes.adb" 11 0 0]
+                     (Pigeonholes__pigeonbegone__pos.pos.int__content <-
+                        ([#"pigeonholes.adb" 11 0 0]
+                         [@GP_Shape:L_1_while__pos_assign__add]
+                         [@vc:annotation]
+                         [@GP_Reason:VC_RANGE_CHECK]
+                         [@comment:         Pos := Pos + 1;                     ^ pigeonholes.adb:11:21:VC_RANGE_CHECK]
+                         [@GP_Id:0]
+                         [@GP_Sloc:pigeonholes.adb:11:21]
+                         (Pigeonholes__ph_index.range_check_
+                            ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                               + (1 : int))))));
+                    ([@GNAT-comment:Check for absence of RTE in the loop invariant and variant]
+                     ());
+                    (let temp___inv_200 =
+                       (let j = val _f : int in
+                                _f in
+                        if ((Boolean.andb ((1 : int) <= j))
+                              (j
+                                 <= ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                       - (1 : int)))) then
+                          (begin
+                             ensures { true }
+                             let _ =
+                               let _ =
+                                 ((Pigeonholes__box__rep.to_rep
+                                     ((Array__Int__Pigeonholes__box.get
+                                         (Pigeonholes__pigeonbegone__d.d.
+                                            Array__Int__Pigeonholes__box.map__content))
+                                        (assert {
+                                           [#"pigeonholes.adb" 12 0 0]
+                                           [@vc:annotation]
+                                           [@GP_Shape:L_1_while__pragargs__forall__cmp__ixdcomp]
+                                           [@comment:         pragma Loop_Invariant (for all J in d'First..(Pos-1) => d(J) /= Pigeon);                                                                    ^ pigeonholes.adb:12:68:VC_INDEX_CHECK]
+                                           [@GP_Sloc:pigeonholes.adb:12:68]
+                                           [@GP_Reason:VC_INDEX_CHECK]
+                                           [@GP_Id:1]
+                                           ((Pigeonholes__ph_index.first
+                                               <= j) /\
+                                              (j
+                                                 <= Pigeonholes__ph_index.last)) };
+                                         j)))
+                                    <> (0 : int)) in
+                               () in
+                             ()
+                           end)
+                        else ());
+                       (val _f : bool
+                          ensures { ((result = True) <->
+                                       (forall j : int.
+                                          ((((1 : int) <= j) /\
+                                              (j
+                                                 <= ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                                       - (1 : int)))) ->
+                                             ((Pigeonholes__box__rep.to_rep
+                                                 ((Array__Int__Pigeonholes__box.get
+                                                     (Pigeonholes__pigeonbegone__d.d.
+                                                        Array__Int__Pigeonholes__box.map__content))
+                                                    j))
+                                                <> (0 : int))))) } in
+                        _f) in
+                     ());
+                    (begin
+                       ensures { true }
+                       let _ =
+                         let _ =
+                           Pigeonholes__pigeonbegone__pos.pos.int__content in
+                         () in
+                       ()
+                     end));
+                   while True do
+                     invariant LoopInvariant {
+                       [#"pigeonholes.adb" 12 0 0]
+                       [@GP_Reason:VC_LOOP_INVARIANT]
+                       [@GP_Sloc:pigeonholes.adb:12:33]
+                       [@vc:annotation]
+                       [@GP_Shape:L_1_while__pragargs__forall]
+                       [@comment:         pragma Loop_Invariant (for all J in d'First..(Pos-1) => d(J) /= Pigeon);                                 ^ pigeonholes.adb:12:33:VC_LOOP_INVARIANT]
+                       [@GP_Id:2]
+                       (forall j : int.
+                          ((((1 : int) <= j) /\
+                              (j
+                                 <= ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                       - (1 : int)))) ->
+                             ([@GP_Pretty_Ada:871]
+                              [@GP_Sloc:pigeonholes.adb:12:66]
+                              ((Pigeonholes__box__rep.to_rep
+                                  ((Array__Int__Pigeonholes__box.get
+                                      (Pigeonholes__pigeonbegone__d.d.
+                                         Array__Int__Pigeonholes__box.map__content))
+                                     j))
+                                 <> (0 : int))))) }
+                     let loop_var___2081 =
+                       Pigeonholes__pigeonbegone__pos.pos.int__content in
+                     ([@GNAT-comment:gnat_ast_to_ptree: code after the loop invariant]
+                      (([@GNAT-comment:Assume implicit invariants from the loop pigeonholes.adb:8]
+                        ());
+                       assume {
+                         ((((true /\
+                               (((((Pigeonholes__ph_index___axiom.dynamic_invariant
+                                      (Pigeonholes__pigeonbegone__pos.pos.int__content))
+                                     True)
+                                    True)
+                                   True)
+                                  True)) /\
+                              (true /\ true)) /\
+                             (((((Pigeonholes__pigeonhole___axiom.dynamic_invariant
+                                    (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+                                   True)
+                                  True)
+                                 True)
+                                True)) /\
+                            (true /\ true)) };
+                       ([@GNAT-comment:Continuation of loop after loop invariant and variant]
+                        ());
+                       ([@GNAT-comment:Check for the exit condition and loop statements appearing before the loop invariant of loop pigeonholes.adb:8]
+                        ());
+                       (if (not ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                   < (5 : int))) then
+                          (raise Pigeonholes__pigeonbegone__L_1.L_1)
+                        else ())));
+                     ([@GNAT-comment:gnat_ast_to_ptree: code before the loop invariant]
+                      (([@GP_Sloc:pigeonholes.adb:9:12]
+                        [#"pigeonholes.adb" 9 0 0] ());
+                       ([@GP_Sloc:pigeonholes.adb:9:17]
+                        [#"pigeonholes.adb" 9 0 0]
+                        [#"pigeonholes.adb" 9 0 0]
+                        (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content <-
+                           (((Array__Int__Pigeonholes__box.set
+                                (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+                               (Pigeonholes__pigeonbegone__pos.pos.int__content))
+                              (Pigeonholes__box__rep.of_rep (1 : int)))));
+                       ([@GP_Sloc:pigeonholes.adb:11:10]
+                        [#"pigeonholes.adb" 11 0 0] ());
+                       ([@GP_Sloc:pigeonholes.adb:11:17]
+                        [#"pigeonholes.adb" 11 0 0] ());
+                       ([@GP_Sloc:pigeonholes.adb:11:14]
+                        [#"pigeonholes.adb" 11 0 0]
+                        [#"pigeonholes.adb" 11 0 0]
+                        (Pigeonholes__pigeonbegone__pos.pos.int__content <-
+                           ([#"pigeonholes.adb" 11 0 0]
+                            [@GP_Shape:L_1_while__pos_assign__add]
+                            [@vc:annotation]
+                            [@GP_Reason:VC_RANGE_CHECK]
+                            [@comment:         Pos := Pos + 1;                     ^ pigeonholes.adb:11:21:VC_RANGE_CHECK]
+                            [@GP_Id:0]
+                            [@GP_Sloc:pigeonholes.adb:11:21]
+                            (Pigeonholes__ph_index.range_check_
+                               ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                  + (1 : int))))));
+                       ([@GNAT-comment:Check for absence of RTE in the loop invariant and variant]
+                        ());
+                       (let temp___inv_200 =
+                          (let j = val _f : int in
+                                   _f in
+                           if ((Boolean.andb ((1 : int) <= j))
+                                 (j
+                                    <= ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                          - (1 : int)))) then
+                             (begin
+                                ensures { true }
+                                let _ =
+                                  let _ =
+                                    ((Pigeonholes__box__rep.to_rep
+                                        ((Array__Int__Pigeonholes__box.get
+                                            (Pigeonholes__pigeonbegone__d.d.
+                                               Array__Int__Pigeonholes__box.map__content))
+                                           (assert {
+                                              [#"pigeonholes.adb" 12 0 0]
+                                              [@vc:annotation]
+                                              [@GP_Shape:L_1_while__pragargs__forall__cmp__ixdcomp]
+                                              [@comment:         pragma Loop_Invariant (for all J in d'First..(Pos-1) => d(J) /= Pigeon);                                                                    ^ pigeonholes.adb:12:68:VC_INDEX_CHECK]
+                                              [@GP_Sloc:pigeonholes.adb:12:68]
+                                              [@GP_Reason:VC_INDEX_CHECK]
+                                              [@GP_Id:1]
+                                              ((Pigeonholes__ph_index.first
+                                                  <= j) /\
+                                                 (j
+                                                    <= Pigeonholes__ph_index.last)) };
+                                            j)))
+                                       <> (0 : int)) in
+                                  () in
+                                ()
+                              end)
+                           else ());
+                          (val _f : bool
+                             ensures { ((result = True) <->
+                                          (forall j : int.
+                                             ((((1 : int) <= j) /\
+                                                 (j
+                                                    <= ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                                                          - (1 : int)))) ->
+                                                ((Pigeonholes__box__rep.to_rep
+                                                    ((Array__Int__Pigeonholes__box.get
+                                                        (Pigeonholes__pigeonbegone__d.d.
+                                                           Array__Int__Pigeonholes__box.map__content))
+                                                       j))
+                                                   <> (0 : int))))) } in
+                           _f) in
+                        ());
+                       (begin
+                          ensures { true }
+                          let _ =
+                            let _ =
+                              Pigeonholes__pigeonbegone__pos.pos.int__content in
+                            () in
+                          ()
+                        end)));
+                     ([@GNAT-comment:gnat_ast_to_ptree: code checking the variants]
+                      (assert {
+                         [@GP_Reason:VC_LOOP_VARIANT]
+                         [@vc:annotation]
+                         [@GP_Sloc:pigeonholes.adb:13:31]
+                         [@GP_Id:3]
+                         [@GP_Shape:L_1_while__pragargs]
+                         [@comment:         pragma Loop_Variant (Increases => Pos);                               ^ pigeonholes.adb:13:31:VC_LOOP_VARIANT]
+                         (((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                             > loop_var___2081)
+                            ||
+                            ((Pigeonholes__pigeonbegone__pos.pos.int__content)
+                             =
+                             loop_var___2081)
+                            &&
+                            False) };
+                       ()))
+                   done))
+               with Pigeonholes__pigeonbegone__L_1.L_1 -> ()
+               end))
+           else ())));
+        ([@GP_Sloc:pigeonholes.adb:15:17]
+         [#"pigeonholes.adb" 15 0 0]
+         [#"pigeonholes.adb" 15 0 0]
+         (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content <-
+            (((Array__Int__Pigeonholes__box.set
+                 (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+                (5 : int))
+               (Pigeonholes__box__rep.of_rep (1 : int)))));
+        (raise Return__exc)
+      with Return__exc -> ()
+      end);
+     (begin
+        ensures { true }
+        let _ =
+          let _ =
+            (let j = val _f : int in
+                     _f in
+             if ((Boolean.andb ((1 : int) <= j)) (j <= (5 : int))) then
+               (begin
+                  ensures { true }
+                  let _ =
+                    let _ =
+                      ((Pigeonholes__box__rep.to_rep
+                          ((Array__Int__Pigeonholes__box.get
+                              (Pigeonholes__pigeonbegone__d.d.Array__Int__Pigeonholes__box.map__content))
+                             j))
+                         <> (0 : int)) in
+                    () in
+                  ()
+                end)
+             else ());
+            (val _f : bool
+               ensures { ((result = True) <->
+                            (forall j : int.
+                               ((((1 : int) <= j) /\ (j <= (5 : int))) ->
+                                  ([@GP_Pretty_Ada:1059]
+                                   ((Pigeonholes__box__rep.to_rep
+                                       ((Array__Int__Pigeonholes__box.get
+                                           (Pigeonholes__pigeonbegone__d.d.
+                                              Array__Int__Pigeonholes__box.map__content))
+                                          j))
+                                      <> (0 : int)))))) } in
+             _f) in
+          () in
+        ()
+      end))
+end

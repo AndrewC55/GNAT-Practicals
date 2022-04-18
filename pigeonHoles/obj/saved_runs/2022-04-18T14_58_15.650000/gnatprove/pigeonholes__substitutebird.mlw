@@ -1,0 +1,539 @@
+module Pigeonholes__box
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type box
+  
+  val function first : int
+    ensures { result = (0 : int) }
+  
+  val function last : int
+    ensures { result = (1 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = box,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type box__ref = { mutable box__content : box }
+  
+  function box__ref_box__content__projection (a: box__ref) : box =
+    a.box__content
+  
+  meta "model_projection" function box__ref_box__content__projection
+  
+  meta "inline:no" function box__ref_box__content__projection
+  
+  val box__havoc (x: box__ref) : unit
+    writes { x }
+end
+
+module Pigeonholes__box__rep
+  use Pigeonholes__box as Pigeonholes__box
+  use _gnatprove_standard.Main
+  use int.Int
+  clone export ada__model.Rep_Proj_Int with
+    axiom .,
+    type t = Pigeonholes__box.box,
+    predicate in_range = Pigeonholes__box.in_range
+  
+  meta "model_projection" function to_rep
+  
+  meta "inline:no" function to_rep
+end
+
+module Array__Int__Pigeonholes__box
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__box as Pigeonholes__box
+  use Pigeonholes__box__rep as Pigeonholes__box__rep
+  
+  function index_I1_one : int = 1 : int
+  
+  type component_type = Pigeonholes__box.box
+  
+  clone export _gnatprove_standard.Array__1 with
+    axiom .,
+    type I1.t = int,
+    predicate I1.le = Int.( <= ),
+    predicate I1.lt = Int.( < ),
+    predicate I1.gt = Int.( > ),
+    function I1.add = Int.( + ),
+    function I1.sub = Int.( - ),
+    function I1.one = index_I1_one,
+    type component_type = component_type
+  
+  function bool_eq (a: map) (a__first: int) (a__last: int) (b: map) (b__first: int) (b__last: int) : bool =
+    ((if (a__first <= a__last) then
+        ((b__first <= b__last) /\
+           ((a__last - a__first) = (b__last - b__first)))
+      else (b__first > b__last)) /\
+       (forall temp___idx_161 : int.
+          if ((a__first <= temp___idx_161) /\ (temp___idx_161 <= a__last)) then
+            ((Pigeonholes__box__rep.to_rep ((get a) temp___idx_161))
+               = (Pigeonholes__box__rep.to_rep
+                    ((get b) ((b__first - a__first) + temp___idx_161))))
+          else true))
+  
+  val bool_eq (a: map) (a__first: int) (a__last: int) (b: map) (b__first: int) (b__last: int) : 
+    bool
+    ensures { result
+      =
+      ((((((bool_eq (a : map)) (a__first : int)) (a__last : int)) (b : map))
+          (b__first : int))
+         (b__last : int)) }
+  
+  axiom bool_eq_rev:
+    forall a : map, b : map.
+      forall a__first : int, a__last : int, b__first : int, b__last : int.
+        ((((((((bool_eq b) b__first) b__last) a) a__first) a__last) = True) ->
+           ((if (a__first <= a__last) then
+               ((b__first <= b__last) /\
+                  ((a__last - a__first) = (b__last - b__first)))
+             else (b__first > b__last)) /\
+              (forall temp___idx_161 : int.
+                 if ((a__first <= temp___idx_161) /\
+                       (temp___idx_161 <= a__last)) then
+                   ((Pigeonholes__box__rep.to_rep ((get a) temp___idx_161))
+                      = (Pigeonholes__box__rep.to_rep
+                           ((get b) ((b__first - a__first) + temp___idx_161))))
+                 else true)))
+end
+
+module Pigeonholes__countbirds
+  use _gnatprove_standard.Main
+  use int.Int
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  
+  val function countbirds (d: Array__Int__Pigeonholes__box.map) (b: int) : 
+    int
+  
+  val predicate countbirds__function_guard (temp___result_162: int) (d: 
+    Array__Int__Pigeonholes__box.map) (b: int)
+end
+
+module Standard__integer
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type integer = <range -2147483648 2147483647>
+  
+  val function first : int
+    ensures { result = ((- 2147483648) : int) }
+  
+  val function last : int
+    ensures { result = (2147483647 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = integer,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type integer__ref = { mutable integer__content : integer }
+  
+  function integer__ref_integer__content__projection (a: integer__ref) : integer =
+    a.integer__content
+  
+  meta "model_projection" function integer__ref_integer__content__projection
+  
+  meta "inline:no" function integer__ref_integer__content__projection
+  
+  val integer__havoc (x: integer__ref) : unit
+    writes { x }
+end
+
+module Standard__integer___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Standard__integer as Standard__integer
+  
+  predicate dynamic_invariant (temp___expr_18: int) (temp___is_init_14: bool) (temp___skip_constant_15: bool) (temp___do_toplevel_16: bool) (temp___do_typ_inv_17: bool) =
+    if ((temp___is_init_14 = True) \/
+          (Standard__integer.first <= Standard__integer.last)) then
+      (((Standard__integer.dynamic_property Standard__integer.first)
+          Standard__integer.last)
+         temp___expr_18)
+    else true
+  
+  val dynamic_invariant (temp___expr_18: int) (temp___is_init_14: bool) (temp___skip_constant_15: bool) (temp___do_toplevel_16: bool) (temp___do_typ_inv_17: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_18 : int))
+                      (temp___is_init_14 : bool))
+                     (temp___skip_constant_15 : bool))
+                    (temp___do_toplevel_16 : bool))
+                   (temp___do_typ_inv_17 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_19: int) (temp___skip_top_level_20: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_19: int) (temp___skip_top_level_20: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_19 : int))
+                   (temp___skip_top_level_20 : bool)) }
+end
+
+module Pigeonholes__box___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__box as Pigeonholes__box
+  
+  predicate dynamic_invariant (temp___expr_167: int) (temp___is_init_163: bool) (temp___skip_constant_164: bool) (temp___do_toplevel_165: bool) (temp___do_typ_inv_166: bool) =
+    if ((temp___is_init_163 = True) \/
+          (Pigeonholes__box.first <= Pigeonholes__box.last)) then
+      (((Pigeonholes__box.dynamic_property Pigeonholes__box.first)
+          Pigeonholes__box.last)
+         temp___expr_167)
+    else true
+  
+  val dynamic_invariant (temp___expr_167: int) (temp___is_init_163: bool) (temp___skip_constant_164: bool) (temp___do_toplevel_165: bool) (temp___do_typ_inv_166: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_167 : int))
+                      (temp___is_init_163 : bool))
+                     (temp___skip_constant_164 : bool))
+                    (temp___do_toplevel_165 : bool))
+                   (temp___do_typ_inv_166 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_168: int) (temp___skip_top_level_169: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_168: int) (temp___skip_top_level_169: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_168 : int))
+                   (temp___skip_top_level_169 : bool)) }
+end
+
+module Pigeonholes__pigeonhole___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  
+  predicate dynamic_invariant (temp___expr_181: Array__Int__Pigeonholes__box.map) (temp___is_init_177: bool) (temp___skip_constant_178: bool) (temp___do_toplevel_179: bool) (temp___do_typ_inv_180: bool) =
+    true
+  
+  val dynamic_invariant (temp___expr_181: Array__Int__Pigeonholes__box.map) (temp___is_init_177: bool) (temp___skip_constant_178: bool) (temp___do_toplevel_179: bool) (temp___do_typ_inv_180: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant
+                       (temp___expr_181 : Array__Int__Pigeonholes__box.map))
+                      (temp___is_init_177 : bool))
+                     (temp___skip_constant_178 : bool))
+                    (temp___do_toplevel_179 : bool))
+                   (temp___do_typ_inv_180 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_183: Array__Int__Pigeonholes__box.map) (temp___skip_top_level_184: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_183: Array__Int__Pigeonholes__box.map) (temp___skip_top_level_184: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption
+                    (temp___expr_183 : Array__Int__Pigeonholes__box.map))
+                   (temp___skip_top_level_184 : bool)) }
+end
+
+module Pigeonholes__countbirds___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Standard__integer___axiom as Standard__integer___axiom
+  use Pigeonholes__countbirds as Pigeonholes__countbirds
+  use Pigeonholes__box___axiom as Pigeonholes__box___axiom
+  use Pigeonholes__pigeonhole___axiom as Pigeonholes__pigeonhole___axiom
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  
+  val countbirds (d: Array__Int__Pigeonholes__box.map) (b: int) : int
+    requires { true }
+    ensures { (((result = ((Pigeonholes__countbirds.countbirds d) b)) /\
+                  (((Pigeonholes__countbirds.countbirds__function_guard
+                       result)
+                      d)
+                     b)) /\
+                 ((((((Standard__integer___axiom.dynamic_invariant result)
+                        True)
+                       False)
+                      True)
+                     True) /\
+                    (([@GP_Pretty_Ada:1078] (result >= (0 : int))) /\
+                       ([@GP_Pretty_Ada:1084] (result <= (20 : int)))))) }
+  
+  axiom countbirds__post_axiom:
+    forall d : Array__Int__Pigeonholes__box.map.
+      forall b : int [(Pigeonholes__countbirds.countbirds d) b].
+        (((((((Pigeonholes__pigeonhole___axiom.dynamic_invariant d) True)
+               True)
+              True)
+             True) /\
+            (((((Pigeonholes__box___axiom.dynamic_invariant b) True) True)
+                True)
+               True)) ->
+           (let result = (Pigeonholes__countbirds.countbirds d) b in
+            if (((Pigeonholes__countbirds.countbirds__function_guard result)
+                   d)
+                  b) then
+              (((([@GP_Pretty_Ada:1078] (result >= (0 : int))) /\
+                   ([@GP_Pretty_Ada:1084] (result <= (20 : int)))) /\
+                  (((((Standard__integer___axiom.dynamic_invariant result)
+                        True)
+                       False)
+                      True)
+                     True)) /\
+                 true)
+            else true))
+end
+
+module Pigeonholes__substitutebird__d
+  use _gnatprove_standard.Main
+  use int.Int
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  
+  val d : Array__Int__Pigeonholes__box.map__ref
+end
+
+module Pigeonholes__substitutebird__n
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val function n : int
+end
+
+module Pigeonholes__substitutebird__b
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val function b : int
+end
+
+module Pigeonholes__ph_index
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type ph_index = <range 1 20>
+  
+  val function first : int
+    ensures { result = (1 : int) }
+  
+  val function last : int
+    ensures { result = (20 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = ph_index,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type ph_index__ref = { mutable ph_index__content : ph_index }
+  
+  function ph_index__ref_ph_index__content__projection (a: ph_index__ref) : ph_index =
+    a.ph_index__content
+  
+  meta "model_projection" function ph_index__ref_ph_index__content__projection
+  
+  meta "inline:no" function ph_index__ref_ph_index__content__projection
+  
+  val ph_index__havoc (x: ph_index__ref) : unit
+    writes { x }
+end
+
+module Pigeonholes__ph_index___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__ph_index as Pigeonholes__ph_index
+  
+  predicate dynamic_invariant (temp___expr_174: int) (temp___is_init_170: bool) (temp___skip_constant_171: bool) (temp___do_toplevel_172: bool) (temp___do_typ_inv_173: bool) =
+    if ((temp___is_init_170 = True) \/
+          (Pigeonholes__ph_index.first <= Pigeonholes__ph_index.last)) then
+      (((Pigeonholes__ph_index.dynamic_property Pigeonholes__ph_index.first)
+          Pigeonholes__ph_index.last)
+         temp___expr_174)
+    else true
+  
+  val dynamic_invariant (temp___expr_174: int) (temp___is_init_170: bool) (temp___skip_constant_171: bool) (temp___do_toplevel_172: bool) (temp___do_typ_inv_173: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_174 : int))
+                      (temp___is_init_170 : bool))
+                     (temp___skip_constant_171 : bool))
+                    (temp___do_toplevel_172 : bool))
+                   (temp___do_typ_inv_173 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_175: int) (temp___skip_top_level_176: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_175: int) (temp___skip_top_level_176: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_175 : int))
+                   (temp___skip_top_level_176 : bool)) }
+end
+
+module Pigeonholes__substitutebird__d___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Pigeonholes__substitutebird__n___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Pigeonholes__substitutebird__b___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Pigeonholes__substitutebird__subprogram_def
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Pigeonholes__countbirds as Pigeonholes__countbirds
+  use Pigeonholes__countbirds___axiom as Pigeonholes__countbirds___axiom
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Pigeonholes__substitutebird__d as Pigeonholes__substitutebird__d
+  use Pigeonholes__substitutebird__n as Pigeonholes__substitutebird__n
+  use Pigeonholes__substitutebird__b as Pigeonholes__substitutebird__b
+  use Pigeonholes__box as Pigeonholes__box
+  use Pigeonholes__box___axiom as Pigeonholes__box___axiom
+  use Pigeonholes__box__rep as Pigeonholes__box__rep
+  use Pigeonholes__ph_index___axiom as Pigeonholes__ph_index___axiom
+  use Array__Int__Pigeonholes__box as Array__Int__Pigeonholes__box
+  use Pigeonholes__pigeonhole___axiom as Pigeonholes__pigeonhole___axiom
+  use Standard__integer___axiom as Standard__integer___axiom
+  use Pigeonholes__box___axiom as Pigeonholes__box___axiom
+  use Pigeonholes__ph_index___axiom as Pigeonholes__ph_index___axiom
+  use Pigeonholes__pigeonhole___axiom as Pigeonholes__pigeonhole___axiom
+  use Pigeonholes__countbirds___axiom as Pigeonholes__countbirds___axiom
+  use Pigeonholes__substitutebird__d___axiom as Pigeonholes__substitutebird__d___axiom
+  use Pigeonholes__substitutebird__n___axiom as Pigeonholes__substitutebird__n___axiom
+  use Pigeonholes__substitutebird__b___axiom as Pigeonholes__substitutebird__b___axiom
+  
+  let def (__void_param : unit)
+    requires { [#"pigeonholes.ads" 14 0 0] true }
+    ensures { [#"pigeonholes.ads" 14 0 0]
+              [#"pigeonholes.ads" 15 0 0]
+              [@GP_Reason:VC_POSTCONDITION]
+              [@GP_Shape:pragargs__cmp]
+              [@comment:     Post => CountBirds(d, b) >= CountBirds(d'Old, b);              ^ pigeonholes.ads:15:14:VC_POSTCONDITION]
+              [@model_vc_post]
+              [@GP_Sloc:pigeonholes.ads:15:14]
+              [@GP_Id:7]
+              [@GP_Pretty_Ada:1199]
+              [@GP_Sloc:pigeonholes.ads:15:14]
+              ((epsilon temp___result_214: int.
+                  ((temp___result_214
+                      = ((Pigeonholes__countbirds.countbirds
+                            (Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content))
+                           Pigeonholes__substitutebird__b.b)) /\
+                     (((Pigeonholes__countbirds.countbirds__function_guard
+                          temp___result_214)
+                         (Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content))
+                        Pigeonholes__substitutebird__b.b)))
+                 >= (epsilon temp___result_215: int.
+                       ((temp___result_215
+                           = ((Pigeonholes__countbirds.countbirds
+                                 (old (Pigeonholes__substitutebird__d.d.
+                                         Array__Int__Pigeonholes__box.map__content)))
+                                Pigeonholes__substitutebird__b.b)) /\
+                          (((Pigeonholes__countbirds.countbirds__function_guard
+                               temp___result_215)
+                              (old (Pigeonholes__substitutebird__d.d.
+                                      Array__Int__Pigeonholes__box.map__content)))
+                             Pigeonholes__substitutebird__b.b)))) }
+  = [@vc:divergent]
+    (([@GNAT-comment:Assume dynamic invariants of inputs of the subprogram pigeonholes.ads:14]
+      ());
+     assume {
+       ((((Pigeonholes__pigeonhole___axiom.dynamic_invariant
+             (Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content))
+            True)
+           False)
+          True)
+         True };
+     assume {
+       ((((Pigeonholes__ph_index___axiom.dynamic_invariant
+             Pigeonholes__substitutebird__n.n)
+            True)
+           False)
+          True)
+         True };
+     assume {
+       ((((Pigeonholes__box___axiom.dynamic_invariant
+             Pigeonholes__substitutebird__b.b)
+            True)
+           False)
+          True)
+         True };
+     ([@GNAT-comment:Assume moved pointers in outputs of the subprogram pigeonholes.ads:14]
+      ());
+     ([@GNAT-comment:Check for RTE in the Pre of the subprogram pigeonholes.ads:14]
+      ());
+     ([@GNAT-comment:Assume Pre of the subprogram pigeonholes.ads:14] ());
+     (let temp___old_212 =
+        Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content in
+      (try
+         ([@GP_Sloc:pigeonholes.adb:33:12]
+          [#"pigeonholes.adb" 33 0 0]
+          [#"pigeonholes.adb" 33 0 0]
+          (Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content <-
+             (((Array__Int__Pigeonholes__box.set
+                  (Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content))
+                 Pigeonholes__substitutebird__n.n)
+                (Pigeonholes__box__rep.of_rep
+                   Pigeonholes__substitutebird__b.b))));
+         (raise Return__exc)
+       with Return__exc -> ()
+       end);
+      (begin
+         ensures { true }
+         let _ =
+           let _ =
+             (((Pigeonholes__countbirds___axiom.countbirds
+                  (Pigeonholes__substitutebird__d.d.Array__Int__Pigeonholes__box.map__content))
+                 Pigeonholes__substitutebird__b.b)
+                >= ((Pigeonholes__countbirds___axiom.countbirds
+                       temp___old_212)
+                      Pigeonholes__substitutebird__b.b)) in
+           () in
+         ()
+       end)))
+end

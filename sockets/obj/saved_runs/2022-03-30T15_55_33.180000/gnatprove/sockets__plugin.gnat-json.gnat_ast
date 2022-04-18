@@ -1,0 +1,454 @@
+(* Module for axiomatizing type "presentabsent" defined at sockets.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Sockets__presentabsent
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type presentabsent  
+  
+  function   first () requires { True } ensures  { True } returns int = 0
+  
+  function   last () requires { True } ensures  { True } returns int = 1
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = presentabsent,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type presentabsent__ref  = { mutable presentabsent__content : presentabsent }
+  
+  function   presentabsent__ref_presentabsent__content__projection
+    (a : presentabsent__ref) requires {  } ensures  {  } returns
+    presentabsent = a.presentabsent__content
+  
+  meta model_projection function presentabsent__ref_presentabsent__content__projection
+  
+  meta inline:no function presentabsent__ref_presentabsent__content__projection
+  
+  function   presentabsent__havoc (x : presentabsent__ref) requires {  }
+    ensures  {  } returns unit
+
+end
+
+(* Module defining to_rep/of_rep for type "presentabsent" defined at sockets.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Sockets__presentabsent__rep
+  
+  use        Sockets__presentabsent
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  clone export ada__model.Rep_Proj_Int with axiom . type t = Sockets__presentabsent.presentabsent,
+    predicate in_range = Sockets__presentabsent.in_range
+  
+  meta model_projection function to_rep
+  
+  meta inline:no function to_rep
+
+end
+
+(* Module for axiomatizing type "onoff" defined at sockets.ads:5, created in Gnat2Why.Types.Translate_Type *)
+module Sockets__onoff
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type onoff  
+  
+  function   first () requires { True } ensures  { True } returns int = 0
+  
+  function   last () requires { True } ensures  { True } returns int = 1
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = onoff,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type onoff__ref  = { mutable onoff__content : onoff }
+  
+  function   onoff__ref_onoff__content__projection (a : onoff__ref) requires
+    {  } ensures  {  } returns onoff = a.onoff__content
+  
+  meta model_projection function onoff__ref_onoff__content__projection
+  
+  meta inline:no function onoff__ref_onoff__content__projection
+  
+  function   onoff__havoc (x : onoff__ref) requires {  } ensures  {  }
+    returns unit
+
+end
+
+(* Module defining to_rep/of_rep for type "onoff" defined at sockets.ads:5, created in Gnat2Why.Types.Translate_Type *)
+module Sockets__onoff__rep
+  
+  use        Sockets__onoff
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  clone export ada__model.Rep_Proj_Int with axiom . type t = Sockets__onoff.onoff,
+    predicate in_range = Sockets__onoff.in_range
+  
+  meta model_projection function to_rep
+  
+  meta inline:no function to_rep
+
+end
+
+(* Module for axiomatizing the record theory associated to type "socket" defined at sockets.ads:7, created in Why.Gen.Records.Create_Rep_Record_Theory_If_Needed *)
+module Sockets__socket__rep
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Sockets__presentabsent
+  use        Sockets__presentabsent__rep
+  use        Sockets__onoff
+  use        Sockets__onoff__rep
+  
+  type __split_fields  = { [name:plug]
+                           [model_trace:.860]rec__sockets__socket__plug : Sockets__presentabsent.presentabsent;
+                           [model_trace:.865]
+                           [name:switch]rec__sockets__socket__switch : Sockets__onoff.onoff }
+  
+  function [name:plug] [model_trace:.860] 
+    __split_fields_rec__sockets__socket__plug__projection
+    (a : __split_fields) requires {  } ensures  {  } returns
+    Sockets__presentabsent.presentabsent = a.rec__sockets__socket__plug
+  
+  meta model_projection function __split_fields_rec__sockets__socket__plug__projection
+  
+  meta inline:no function __split_fields_rec__sockets__socket__plug__projection
+  
+  function [model_trace:.865] [name:switch] 
+    __split_fields_rec__sockets__socket__switch__projection
+    (a : __split_fields) requires {  } ensures  {  } returns
+    Sockets__onoff.onoff = a.rec__sockets__socket__switch
+  
+  meta model_projection function __split_fields_rec__sockets__socket__switch__projection
+  
+  meta inline:no function __split_fields_rec__sockets__socket__switch__projection
+  
+  type __split_fields__ref  = { mutable __split_fields__content : __split_fields }
+  
+  function   __split_fields__ref___split_fields__content__projection
+    (a : __split_fields__ref) requires {  } ensures  {  } returns
+    __split_fields = a.__split_fields__content
+  
+  meta model_projection function __split_fields__ref___split_fields__content__projection
+  
+  meta inline:no function __split_fields__ref___split_fields__content__projection
+  
+  function   __split_fields__havoc (x : __split_fields__ref) requires {  }
+    ensures  {  } returns unit
+  
+  type __rep  = { __split_fields : __split_fields }
+  
+  function   __rep___split_fields__projection (a : __rep) requires {  }
+    ensures  {  } returns __split_fields = a.__split_fields
+  
+  meta model_projection function __rep___split_fields__projection
+  
+  meta inline:no function __rep___split_fields__projection
+  
+  function   to_base (a : __rep) requires { True } ensures  { True } returns
+    __rep = a
+  
+  function   of_base (a : __rep) requires { True } ensures  { True } returns
+    __rep = a
+  
+  function   sockets__socket__plug__pred (a : __rep) requires { True }
+    ensures  { True } returns  = True
+  
+  function   rec__sockets__socket__plug_ (a : __rep) requires
+    { (sockets__socket__plug__pred a) } ensures 
+    { (result = a.__split_fields.rec__sockets__socket__plug) } returns
+    Sockets__presentabsent.presentabsent
+  
+  function   sockets__socket__switch__pred (a : __rep) requires { True }
+    ensures  { True } returns  = True
+  
+  function   rec__sockets__socket__switch_ (a : __rep) requires
+    { (sockets__socket__switch__pred a) } ensures 
+    { (result = a.__split_fields.rec__sockets__socket__switch) } returns
+    Sockets__onoff.onoff
+  
+  function   bool_eq (a : __rep b : __rep) requires { True } ensures 
+    { True } returns
+    bool = (if
+           (((Sockets__presentabsent__rep.to_rep
+                a.__split_fields.rec__sockets__socket__plug)
+               = (Sockets__presentabsent__rep.to_rep
+                    b.__split_fields.rec__sockets__socket__plug)) /\
+              ((Sockets__onoff__rep.to_rep
+                  a.__split_fields.rec__sockets__socket__switch)
+                 = (Sockets__onoff__rep.to_rep
+                      b.__split_fields.rec__sockets__socket__switch)))
+           then True  else False)
+
+end
+
+(* Module for axiomatizing type "socket" defined at sockets.ads:7, created in Gnat2Why.Types.Translate_Type *)
+module Sockets__socket
+  
+  use export Sockets__socket__rep
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type socket  = --pp_transparent_type_definition NOT IMPLEMENTED
+  
+  function   value__size () requires {  } ensures  {  } returns int
+  
+  function   object__size () requires {  } ensures  {  } returns int
+  
+  function   alignment () requires {  } ensures  {  } returns int
+  
+  axiom value__size_axiom : ((value__size ) >= 0)
+  
+  axiom object__size_axiom : ((object__size ) >= 0)
+  
+  axiom alignment_axiom : ((alignment ) >= 0)
+  
+  function   sockets__socket__plug__first__bit () requires {  } ensures  {  }
+    returns int
+  
+  function   sockets__socket__plug__last__bit () requires {  } ensures  {  }
+    returns int
+  
+  function   sockets__socket__plug__position () requires {  } ensures  {  }
+    returns int
+  
+  axiom sockets__socket__plug__first__bit_axiom : ((sockets__socket__plug__first__bit
+                                                      ) >= 0)
+  
+  axiom sockets__socket__plug__last__bit_axiom : ((sockets__socket__plug__last__bit
+                                                     )
+                                                    > (sockets__socket__plug__first__bit
+                                                         ))
+  
+  axiom sockets__socket__plug__position_axiom : ((sockets__socket__plug__position
+                                                    ) >= 0)
+  
+  function   sockets__socket__switch__first__bit () requires {  } ensures 
+    {  } returns int
+  
+  function   sockets__socket__switch__last__bit () requires {  } ensures 
+    {  } returns int
+  
+  function   sockets__socket__switch__position () requires {  } ensures  {  }
+    returns int
+  
+  axiom sockets__socket__switch__first__bit_axiom : ((sockets__socket__switch__first__bit
+                                                        ) >= 0)
+  
+  axiom sockets__socket__switch__last__bit_axiom : ((sockets__socket__switch__last__bit
+                                                       )
+                                                      > (sockets__socket__switch__first__bit
+                                                           ))
+  
+  axiom sockets__socket__switch__position_axiom : ((sockets__socket__switch__position
+                                                      ) >= 0)
+  
+  function   user_eq (a : socket b : socket) requires { True } ensures 
+    { True } returns bool
+  
+  function   dummy () requires {  } ensures  {  } returns socket
+  
+  type socket__ref  = { mutable socket__content : socket }
+  
+  function   socket__ref_socket__content__projection (a : socket__ref)
+    requires {  } ensures  {  } returns socket = a.socket__content
+  
+  meta model_projection function socket__ref_socket__content__projection
+  
+  meta inline:no function socket__ref_socket__content__projection
+  
+  function   socket__havoc (x : socket__ref) requires {  } ensures  {  }
+    returns unit
+
+end
+
+(* Module for defining a ref holding the value of variable "s1" defined at sockets.ads:12, created in Gnat2Why.Decls.Translate_Variable *)
+module Sockets__s1
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Sockets__socket
+  
+  val s1__split_fields [model_projected] [model_trace:871]
+  [name:S1] [sloc:sockets.ads:12]: Sockets__socket.__split_fields
+
+end
+
+(* Module giving axioms for type "socket" defined at sockets.ads:7, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Sockets__socket___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Sockets__socket
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol]
+    [introduced] temp___expr_179) : Sockets__socket.socket
+    ([mlw:proxy_symbol] [introduced] temp___is_init_175) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_176) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_177) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_178) : bool) requires
+    { True } ensures  { True } returns  = True
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol]
+    [introduced] temp___expr_180) : Sockets__socket.socket
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_181) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving axioms for type "presentabsent" defined at sockets.ads:4, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Sockets__presentabsent___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Sockets__presentabsent
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_165) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_161) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_162) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_163) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_164) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_161) = True) \/
+          (Sockets__presentabsent.first <= Sockets__presentabsent.last))
+       then
+       (Sockets__presentabsent.dynamic_property Sockets__presentabsent.first
+          Sockets__presentabsent.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_165))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_166) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_167) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving axioms for type "onoff" defined at sockets.ads:5, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Sockets__onoff___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Sockets__onoff
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_172) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_168) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_169) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_170) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_171) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_168) = True) \/
+          (Sockets__onoff.first <= Sockets__onoff.last))
+       then
+       (Sockets__onoff.dynamic_property Sockets__onoff.first
+          Sockets__onoff.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_172))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_173) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_174) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving an empty axiom for the entity "s1" defined at sockets.ads:12, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Sockets__s1___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "plugin" defined at sockets.ads:14, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Sockets__plugin__subprogram_def
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Sockets__s1
+  use        Sockets__socket
+  use        Sockets__socket___axiom
+  use        Sockets__presentabsent
+  use        Sockets__presentabsent__rep
+  use        Sockets__onoff
+  use        Sockets__onoff__rep
+  use        Sockets__presentabsent___axiom
+  use        Sockets__onoff___axiom
+  use        Sockets__socket___axiom
+  use        Sockets__s1___axiom
+  
+  function [GP_Subp:sockets.ads:14] [sloc:sockets.ads:14] def
+    (__void_param : unit) requires { True } ensures 
+    { ([sloc:sockets.ads:17] ([GP_Reason:VC_POSTCONDITION]
+                             [GP_Shape:pragargs__cmp]
+                             [GP_Sloc:sockets.ads:17:14] [model_vc_post]
+                             [GP_Id:0]
+                             [comment:     Post => S1.switch = Off;              ^ sockets.ads:17:14:VC_POSTCONDITION] 
+                             ([GP_Pretty_Ada:957]
+                             [GP_Sloc:sockets.ads:17:14] ((Sockets__onoff__rep.to_rep
+                                                             ( --pp_record_aggregate NOT IMPLEMENTED).Sockets__socket.__split_fields.Sockets__socket.rec__sockets__socket__switch)
+                                                            = 1)))) } returns
+     = (* Assume dynamic invariants of inputs of the subprogram sockets.ads:14 *);
+        assume
+        { (Sockets__socket___axiom.dynamic_invariant
+             --pp_record_aggregate NOT IMPLEMENTED True False True True) };
+        (* Assume moved pointers in outputs of the subprogram sockets.ads:14 *);
+        (* Check for RTE in the Pre of the subprogram sockets.ads:14 *);
+        abstract ensures
+        { True } begin  (let _ =
+                       ((Sockets__onoff__rep.to_rep
+                           ( --pp_record_aggregate NOT IMPLEMENTED).Sockets__socket.__split_fields.Sockets__socket.rec__sockets__socket__switch)
+                          = 1)
+                       in ())  end;
+        (* Assume Pre of the subprogram sockets.ads:14 *);
+        assume
+        { ([GP_Pretty_Ada:945] ((Sockets__onoff__rep.to_rep
+                                   ( --pp_record_aggregate NOT IMPLEMENTED).Sockets__socket.__split_fields.Sockets__socket.rec__sockets__socket__switch)
+                                  = 1)) };
+        (try
+        ();
+          ([GP_Sloc:sockets.adb:7:7] ([sloc:sockets.adb:7] ()));
+          ([GP_Sloc:sockets.adb:7:15] ([sloc:sockets.adb:7] (let ([mlw:proxy_symbol]
+                                      [introduced] temp___187) =
+                                      (let ([mlw:proxy_symbol]
+                                        [introduced] temp___186) =
+                                        ( --pp_record_aggregate NOT IMPLEMENTED)
+                                        in abstract ensures
+                                        { True } begin  (let _ =
+                                                       ([mlw:proxy_symbol]
+                                                         [introduced] temp___186).Sockets__socket.__split_fields.Sockets__socket.rec__sockets__socket__plug
+                                                       in ())  end;
+                                        --pp_record_update NOT IMPLEMENTED)
+                                      in ( Sockets__s1.s1__split_fields :=
+                                      ([mlw:proxy_symbol]
+                                        [introduced] temp___187).Sockets__socket.__split_fields))));
+          raise Return__exc with | Return__exc  -> ());
+        abstract ensures
+        { True } begin  (let _ =
+                       ((Sockets__onoff__rep.to_rep
+                           ( --pp_record_aggregate NOT IMPLEMENTED).Sockets__socket.__split_fields.Sockets__socket.rec__sockets__socket__switch)
+                          = 1)
+                       in ())  end
+
+end

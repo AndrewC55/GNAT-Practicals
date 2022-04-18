@@ -1,0 +1,2 @@
+pigeonholes.ads:15:16: error: expected type "PH_Index" defined at line 5
+pigeonholes.ads:15:16: error: found type "Box" defined at line 4

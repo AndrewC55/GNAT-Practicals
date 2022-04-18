@@ -1,0 +1,3 @@
+pigeonholes.adb:25:36: medium: overflow check might fail [reason for check: result of addition must fit in a 32-bits machine integer][#0]
+pigeonholes.ads:12:14: medium: postcondition might fail, cannot prove CountBirds'Result >= 0[#1]
+pigeonholes.ads:15:14: medium: postcondition might fail[#2]

@@ -1,0 +1,19 @@
+[GENERATED OBJECT FILE]
+b__main.o
+[PROJECT FILES]
+C:\GNAT\Practicals\ticketMachine\ticketmachine.gpr
+20220418114358 1030bbb027e7541854becc7beb73e240
+[BOUND OBJECT FILES]
+C:\GNAT\Practicals\ticketMachine\obj\main.o
+[GENERATED SOURCE FILES]
+b__main.ads
+b__main.adb
+b__main.ali
+[RESULTING OPTIONS]
+-LC:\GNAT\Practicals\ticketMachine\obj\
+-LC:\GNAT\Practicals\ticketMachine\obj\
+-LC:/gnat/2021/lib/gcc/x86_64-w64-mingw32/10.3.1/adalib/
+-static
+-static-libgcc
+C:/gnat/2021/lib/gcc/x86_64-w64-mingw32/10.3.1/adalib/libgnat.a
+-Wl,--stack=0x2000000

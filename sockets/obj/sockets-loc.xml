@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project>
+    <vfs_file />
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 14" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 24" line=" 7" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 16" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 21" line=" 7" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 11" line=" 14" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 41" line=" 4" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 14" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 41" line=" 4" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 14" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 24" line=" 5" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 11" line=" 8" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 7" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 29" line=" 6" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 22" line=" 7" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 11" line=" 14" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 12" line=" 13" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 21" line=" 7" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 20" line=" 12" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\levelsOfSpark\src\Levels.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 13" line=" 21" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\sockets\sockets.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 18" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\sockets\sockets.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\sockets\src\sockets.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 5" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\sockets\src\sockets.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\sockets\src\sockets.ads</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

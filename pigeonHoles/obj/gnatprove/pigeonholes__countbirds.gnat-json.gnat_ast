@@ -1,0 +1,883 @@
+(* Module for axiomatizing type "integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type integer  = <range -2147483648 2147483647>
+  
+  function   first () requires { True } ensures  { True } returns
+    int = -2147483648
+  
+  function   last () requires { True } ensures  { True } returns
+    int = 2147483647
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = integer,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type integer__ref  = { mutable integer__content : integer }
+  
+  function   integer__ref_integer__content__projection (a : integer__ref)
+    requires {  } ensures  {  } returns integer = a.integer__content
+  
+  meta model_projection function integer__ref_integer__content__projection
+  
+  meta inline:no function integer__ref_integer__content__projection
+  
+  function   integer__havoc (x : integer__ref) requires {  } ensures  {  }
+    returns unit
+
+end
+
+(* Module giving axioms for type "integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Standard__integer
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_18) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_14) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_15) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_16) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_17) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_14) = True) \/
+          (Standard__integer.first <= Standard__integer.last))
+       then
+       (Standard__integer.dynamic_property Standard__integer.first
+          Standard__integer.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_18))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_19) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_20) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module for axiomatizing type "box" defined at pigeonholes.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Pigeonholes__box
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type box  
+  
+  function   first () requires { True } ensures  { True } returns int = 0
+  
+  function   last () requires { True } ensures  { True } returns int = 1
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = box,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type box__ref  = { mutable box__content : box }
+  
+  function   box__ref_box__content__projection (a : box__ref) requires {  }
+    ensures  {  } returns box = a.box__content
+  
+  meta model_projection function box__ref_box__content__projection
+  
+  meta inline:no function box__ref_box__content__projection
+  
+  function   box__havoc (x : box__ref) requires {  } ensures  {  } returns
+    unit
+
+end
+
+(* Module defining to_rep/of_rep for type "box" defined at pigeonholes.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Pigeonholes__box__rep
+  
+  use        Pigeonholes__box
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  clone export ada__model.Rep_Proj_Int with axiom . type t = Pigeonholes__box.box,
+    predicate in_range = Pigeonholes__box.in_range
+  
+  meta model_projection function to_rep
+  
+  meta inline:no function to_rep
+
+end
+
+(* Module for axiomatizing the array theory associated to type "TpigeonholeB" defined at pigeonholes.ads:6, created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int__Pigeonholes__box
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Pigeonholes__box
+  use        Pigeonholes__box__rep
+  
+  function   index_I1_one () requires { True } ensures  { True } returns
+    int = 1
+  
+  type component_type  = --pp_transparent_type_definition NOT IMPLEMENTED
+  
+  clone export _gnatprove_standard.Array__1 with axiom . type I1.t = int,
+    predicate I1.le = <=, predicate I1.lt = <, predicate I1.gt = >,
+    function I1.add = +, function I1.sub = -, function I1.one = index_I1_one,
+    type component_type = component_type
+  
+  function   bool_eq
+    (a : map a__first : int a__last : int b : map b__first : int
+    b__last : int) requires { True } ensures  { True } returns
+    bool = ((if (a__first <= a__last) then
+            ((b__first <= b__last) /\
+               ((a__last - a__first) = (b__last - b__first)))
+             else (b__first > b__last)) /\
+              --pp_universal_quantif NOT IMPLEMENTED)
+  
+  axiom bool_eq_rev : --pp_universal_quantif NOT IMPLEMENTED
+
+end
+
+(* Module for defining the constant "d" defined at pigeonholes.ads:11, created in Gnat2Why.Decls.Translate_Constant *)
+module Pigeonholes__countbirds__d
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Array__Int__Pigeonholes__box
+  
+  function [name:d] [model_trace:1061] [model_projected]
+    [sloc:pigeonholes.ads:11] d () requires {  } ensures  {  } returns
+    Array__Int__Pigeonholes__box.map
+
+end
+
+(* Module for defining the constant "b" defined at pigeonholes.ads:11, created in Gnat2Why.Decls.Translate_Constant *)
+module Pigeonholes__countbirds__b
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function [name:b] [model_trace:1064] [sloc:pigeonholes.ads:11] b ()
+    requires {  } ensures  {  } returns int
+
+end
+
+(* Module for defining a ref holding the value of variable "bs" defined at pigeonholes.adb:20, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__countbirds__bs
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val bs [model_trace:897] [model_projected]
+  [name:bs] [sloc:pigeonholes.adb:20]: int
+
+end
+
+(* Module for defining a ref holding the value of variable "n" defined at pigeonholes.adb:21, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__countbirds__n
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val n [model_trace:902] [name:n]
+  [model_projected] [sloc:pigeonholes.adb:21]: int
+
+end
+
+(* Module for defining a ref holding the value of variable "m" defined at pigeonholes.adb:22, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__countbirds__m
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val m [model_trace:908] [name:m]
+  [model_projected] [sloc:pigeonholes.adb:22]: int
+
+end
+
+(* Module for defining the constant "R5b" defined at pigeonholes.adb:24, created in Gnat2Why.Decls.Translate_Constant *)
+module Pigeonholes__countbirds__L_2__R5b
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function  [sloc:pigeonholes.adb:24] r5b () requires {  } ensures  {  }
+    returns int
+
+end
+
+(* Module for defining the constant "R6b" defined at pigeonholes.adb:24, created in Gnat2Why.Decls.Translate_Constant *)
+module Pigeonholes__countbirds__L_2__R6b
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function  [sloc:pigeonholes.adb:24] r6b () requires {  } ensures  {  }
+    returns int
+
+end
+
+(* Module for defining a ref holding the value of variable "i" defined at pigeonholes.adb:24, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__countbirds__L_2__i
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val i [model_projected] [name:I]
+  [model_trace:916] [sloc:pigeonholes.adb:24]: int
+
+end
+
+(* Module giving axioms for type "box" defined at pigeonholes.ads:4, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Pigeonholes__box___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Pigeonholes__box
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_167) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_163) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_164) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_165) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_166) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_163) = True) \/
+          (Pigeonholes__box.first <= Pigeonholes__box.last))
+       then
+       (Pigeonholes__box.dynamic_property Pigeonholes__box.first
+          Pigeonholes__box.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_167))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_168) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_169) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module for axiomatizing type "ph_index" defined at pigeonholes.ads:5, created in Gnat2Why.Types.Translate_Type *)
+module Pigeonholes__ph_index
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type ph_index  = <range 1 5>
+  
+  function   first () requires { True } ensures  { True } returns int = 1
+  
+  function   last () requires { True } ensures  { True } returns int = 5
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = ph_index,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type ph_index__ref  = { mutable ph_index__content : ph_index }
+  
+  function   ph_index__ref_ph_index__content__projection (a : ph_index__ref)
+    requires {  } ensures  {  } returns ph_index = a.ph_index__content
+  
+  meta model_projection function ph_index__ref_ph_index__content__projection
+  
+  meta inline:no function ph_index__ref_ph_index__content__projection
+  
+  function   ph_index__havoc (x : ph_index__ref) requires {  } ensures  {  }
+    returns unit
+
+end
+
+(* Module giving axioms for type "ph_index" defined at pigeonholes.ads:5, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Pigeonholes__ph_index___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Pigeonholes__ph_index
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_174) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_170) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_171) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_172) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_173) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_170) = True) \/
+          (Pigeonholes__ph_index.first <= Pigeonholes__ph_index.last))
+       then
+       (Pigeonholes__ph_index.dynamic_property Pigeonholes__ph_index.first
+          Pigeonholes__ph_index.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_174))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_175) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_176) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving axioms for type "pigeonhole" defined at pigeonholes.ads:6, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Pigeonholes__pigeonhole___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Array__Int__Pigeonholes__box
+  use        Array__Int__Pigeonholes__box
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol]
+    [introduced] temp___expr_181) : Array__Int__Pigeonholes__box.map
+    ([mlw:proxy_symbol] [introduced] temp___is_init_177) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_178) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_179) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_180) : bool) requires
+    { True } ensures  { True } returns  = True
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol]
+    [introduced] temp___expr_183) : Array__Int__Pigeonholes__box.map
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_184) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module for defining the loop exit exception for the loop "L_2" defined at pigeonholes.adb:24, created in Gnat2Why.Decls.Translate_Loop_Entity *)
+module Pigeonholes__countbirds__L_2
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  --pp_exception_declaration NOT IMPLEMENTED
+
+end
+
+(* Module giving an empty axiom for the entity "bs" defined at pigeonholes.adb:20, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__bs___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "n" defined at pigeonholes.adb:21, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__n___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "m" defined at pigeonholes.adb:22, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__m___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "i" defined at pigeonholes.adb:24, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__L_2__i___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "L_2" defined at pigeonholes.adb:24, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__L_2___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "d" defined at pigeonholes.ads:11, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__d___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "b" defined at pigeonholes.ads:11, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__countbirds__b___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for defining the value of constant "R5b" defined at pigeonholes.adb:24, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Pigeonholes__countbirds__L_2__R5b___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for defining the value of constant "R6b" defined at pigeonholes.adb:24, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Pigeonholes__countbirds__L_2__R6b___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "countbirds" defined at pigeonholes.ads:11, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Pigeonholes__countbirds__subprogram_def
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        _gnatprove_standard.Main
+  use        _gnatprove_standard.Boolean
+  use        Standard__integer
+  use        Standard__integer___axiom
+  use        Pigeonholes__countbirds__d
+  use        Pigeonholes__countbirds__b
+  use        Pigeonholes__countbirds__bs
+  use        Pigeonholes__countbirds__n
+  use        Pigeonholes__countbirds__m
+  use        Pigeonholes__countbirds__L_2__R5b
+  use        Pigeonholes__countbirds__L_2__R6b
+  use        Pigeonholes__countbirds__L_2__i
+  use        Pigeonholes__box
+  use        Pigeonholes__box___axiom
+  use        Pigeonholes__box__rep
+  use        Pigeonholes__ph_index___axiom
+  use        Array__Int__Pigeonholes__box
+  use        Pigeonholes__pigeonhole___axiom
+  use        Pigeonholes__countbirds__L_2
+  use        Standard__integer___axiom
+  use        Standard__integer___axiom
+  use        Pigeonholes__countbirds__bs___axiom
+  use        Pigeonholes__countbirds__n___axiom
+  use        Pigeonholes__countbirds__m___axiom
+  use        Pigeonholes__countbirds__L_2__i___axiom
+  use        Pigeonholes__countbirds__L_2___axiom
+  use        Pigeonholes__box___axiom
+  use        Pigeonholes__ph_index___axiom
+  use        Pigeonholes__pigeonhole___axiom
+  use        Pigeonholes__countbirds__d___axiom
+  use        Pigeonholes__countbirds__b___axiom
+  use        Pigeonholes__countbirds__L_2__R5b___axiom
+  use        Pigeonholes__countbirds__L_2__R6b___axiom
+  
+  val pigeonholes__countbirds__result [model_projected]
+  [model_trace:1060@result]
+  [name:CountBirds] : int
+  
+  function [GP_Subp:pigeonholes.ads:11] [sloc:pigeonholes.ads:11] def
+    (__void_param : unit) requires { True } ensures 
+    { ([sloc:pigeonholes.ads:12] ([GP_Reason:VC_POSTCONDITION]
+                                 [comment:     Post => CountBirds'Result >= 0 and CountBirds'Result <= d'Length;              ^ pigeonholes.ads:12:14:VC_POSTCONDITION]
+                                 [GP_Sloc:pigeonholes.ads:12:14]
+                                 [model_vc_post] [GP_Shape:pragargs__and]
+                                 [GP_Id:6] (([GP_Pretty_Ada:1078]
+                                            [GP_Sloc:pigeonholes.ads:12:14] (
+                                            !pigeonholes__countbirds__result
+                                              >= 0)) /\
+                                              ([GP_Sloc:pigeonholes.ads:12:41]
+                                              [GP_Pretty_Ada:1084] (!pigeonholes__countbirds__result
+                                                                    <= 5))))) }
+    returns
+     = (* Assume dynamic invariants of inputs of the subprogram pigeonholes.ads:11 *);
+        assume
+        { (Pigeonholes__pigeonhole___axiom.dynamic_invariant
+             Pigeonholes__countbirds__d.d True False True True) };
+        assume
+        { (Pigeonholes__box___axiom.dynamic_invariant
+             Pigeonholes__countbirds__b.b True False True True) };
+        (* Assume moved pointers in outputs of the subprogram pigeonholes.ads:11 *);
+        (* Check for RTE in the Pre of the subprogram pigeonholes.ads:11 *);
+        abstract ensures
+        { True } begin  (let _ = True in ())  end;
+        (* Assume Pre of the subprogram pigeonholes.ads:11 *);
+        (try
+        ();
+          ([sloc:pigeonholes.adb:20] ( Pigeonholes__countbirds__bs.bs :=
+          ( 0));
+          assume
+          { (Standard__integer___axiom.dynamic_invariant
+               !Pigeonholes__countbirds__bs.bs True False True True) });
+          ([sloc:pigeonholes.adb:21] ( Pigeonholes__countbirds__n.n :=
+          ( 1));
+          assume
+          { (Pigeonholes__ph_index___axiom.dynamic_invariant
+               !Pigeonholes__countbirds__n.n True False True True) });
+          ([sloc:pigeonholes.adb:22] ( Pigeonholes__countbirds__m.m :=
+          ( 5));
+          assume
+          { (Pigeonholes__ph_index___axiom.dynamic_invariant
+               !Pigeonholes__countbirds__m.m True False True True) });
+          ([sloc:pigeonholes.adb:24] ());
+          ();
+          ([GP_Sloc:pigeonholes.adb:24:16] ([sloc:pigeonholes.adb:24] ()));
+          ([GP_Sloc:pigeonholes.adb:24:19] ([sloc:pigeonholes.adb:24] ()));
+          ([GP_Sloc:pigeonholes.adb:24:16] ([sloc:pigeonholes.adb:24] 
+                                           ([sloc:pigeonholes.adb:24] (let pigeonholes__countbirds__L_2__R5b__assume
+                                           = !Pigeonholes__countbirds__n.n in
+                                           assume
+                                           { (pigeonholes__countbirds__L_2__R5b__assume
+                                                = Pigeonholes__countbirds__L_2__R5b.r5b) });
+                                           assume
+                                           { (Pigeonholes__ph_index___axiom.dynamic_invariant
+                                                Pigeonholes__countbirds__L_2__R5b.r5b
+                                                True False True True) })));
+          ([GP_Sloc:pigeonholes.adb:24:19] ([sloc:pigeonholes.adb:24] 
+                                           ([sloc:pigeonholes.adb:24] (let pigeonholes__countbirds__L_2__R6b__assume
+                                           = !Pigeonholes__countbirds__m.m in
+                                           assume
+                                           { (pigeonholes__countbirds__L_2__R6b__assume
+                                                = Pigeonholes__countbirds__L_2__R6b.r6b) });
+                                           assume
+                                           { (Pigeonholes__ph_index___axiom.dynamic_invariant
+                                                Pigeonholes__countbirds__L_2__R6b.r6b
+                                                True False True True) })));
+          ([GP_Sloc:pigeonholes.adb:24:21] ([sloc:pigeonholes.adb:24] (let ([mlw:proxy_symbol]
+                                           [introduced] temp___204) =
+                                           Pigeonholes__countbirds__L_2__R5b.r5b
+                                           in (let ([mlw:proxy_symbol]
+                                           [introduced] temp___205) =
+                                           Pigeonholes__countbirds__L_2__R6b.r6b
+                                           in
+                                           (* Translation of an unrolled Ada loop from pigeonholes.adb:24 *);
+                                           (try
+                                           (* Unrolling of the loop statements of loop pigeonholes.adb:24 *);
+                                             (
+                                             Pigeonholes__countbirds__L_2__i.i
+                                             :=
+                                             1);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___204)
+                                                   <= !Pigeonholes__countbirds__L_2__i.i)
+                                                (!Pigeonholes__countbirds__L_2__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___205)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:10] 
+                                             ([sloc:pigeonholes.adb:25] 
+                                             (if
+                                             ([sloc:pigeonholes.adb:25] ([branch_id=925]
+                                             _gnatprove_standard.Main.spark__branch
+                                             :=
+                                             ((Pigeonholes__box__rep.to_rep
+                                                 (Array__Int__Pigeonholes__box.get
+                                                    Pigeonholes__countbirds__d.d
+                                                    !Pigeonholes__countbirds__L_2__i.i))
+                                                = Pigeonholes__countbirds__b.b)));
+                                             ([branch_id=925] _gnatprove_standard.Main.spark__branch).bool__content
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:27] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:33] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:30] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             ( ([sloc:pigeonholes.adb:25] 
+                                               ([comment:         if d(I) = b then bs := bs + 1; else bs := bs; end if;                                    ^ pigeonholes.adb:25:36:VC_OVERFLOW_CHECK]
+                                               [vc:annotation]
+                                               [GP_Reason:VC_OVERFLOW_CHECK]
+                                               [GP_Sloc:pigeonholes.adb:25:36]
+                                               [GP_Shape:L_2_while__if__bs_assign__add]
+                                               [GP_Id:5] (Standard__integer.range_check_
+                                                            (!Pigeonholes__countbirds__bs.bs
+                                                               + 1))))))))
+                                              else
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:46] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:52] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:49] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             !Pigeonholes__countbirds__bs.bs))))))
+                                             );
+                                             (
+                                             Pigeonholes__countbirds__L_2__i.i
+                                             :=
+                                             2);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___204)
+                                                   <= !Pigeonholes__countbirds__L_2__i.i)
+                                                (!Pigeonholes__countbirds__L_2__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___205)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:10] 
+                                             ([sloc:pigeonholes.adb:25] 
+                                             (if
+                                             ([sloc:pigeonholes.adb:25] ([branch_id=925]
+                                             _gnatprove_standard.Main.spark__branch
+                                             :=
+                                             ((Pigeonholes__box__rep.to_rep
+                                                 (Array__Int__Pigeonholes__box.get
+                                                    Pigeonholes__countbirds__d.d
+                                                    !Pigeonholes__countbirds__L_2__i.i))
+                                                = Pigeonholes__countbirds__b.b)));
+                                             ([branch_id=925] _gnatprove_standard.Main.spark__branch).bool__content
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:27] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:33] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:30] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             ( ([sloc:pigeonholes.adb:25] 
+                                               ([comment:         if d(I) = b then bs := bs + 1; else bs := bs; end if;                                    ^ pigeonholes.adb:25:36:VC_OVERFLOW_CHECK]
+                                               [vc:annotation]
+                                               [GP_Reason:VC_OVERFLOW_CHECK]
+                                               [GP_Sloc:pigeonholes.adb:25:36]
+                                               [GP_Shape:L_2_while__if__bs_assign__add]
+                                               [GP_Id:5] (Standard__integer.range_check_
+                                                            (!Pigeonholes__countbirds__bs.bs
+                                                               + 1))))))))
+                                              else
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:46] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:52] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:49] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             !Pigeonholes__countbirds__bs.bs))))))
+                                             );
+                                             (
+                                             Pigeonholes__countbirds__L_2__i.i
+                                             :=
+                                             3);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___204)
+                                                   <= !Pigeonholes__countbirds__L_2__i.i)
+                                                (!Pigeonholes__countbirds__L_2__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___205)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:10] 
+                                             ([sloc:pigeonholes.adb:25] 
+                                             (if
+                                             ([sloc:pigeonholes.adb:25] ([branch_id=925]
+                                             _gnatprove_standard.Main.spark__branch
+                                             :=
+                                             ((Pigeonholes__box__rep.to_rep
+                                                 (Array__Int__Pigeonholes__box.get
+                                                    Pigeonholes__countbirds__d.d
+                                                    !Pigeonholes__countbirds__L_2__i.i))
+                                                = Pigeonholes__countbirds__b.b)));
+                                             ([branch_id=925] _gnatprove_standard.Main.spark__branch).bool__content
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:27] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:33] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:30] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             ( ([sloc:pigeonholes.adb:25] 
+                                               ([comment:         if d(I) = b then bs := bs + 1; else bs := bs; end if;                                    ^ pigeonholes.adb:25:36:VC_OVERFLOW_CHECK]
+                                               [vc:annotation]
+                                               [GP_Reason:VC_OVERFLOW_CHECK]
+                                               [GP_Sloc:pigeonholes.adb:25:36]
+                                               [GP_Shape:L_2_while__if__bs_assign__add]
+                                               [GP_Id:5] (Standard__integer.range_check_
+                                                            (!Pigeonholes__countbirds__bs.bs
+                                                               + 1))))))))
+                                              else
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:46] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:52] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:49] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             !Pigeonholes__countbirds__bs.bs))))))
+                                             );
+                                             (
+                                             Pigeonholes__countbirds__L_2__i.i
+                                             :=
+                                             4);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___204)
+                                                   <= !Pigeonholes__countbirds__L_2__i.i)
+                                                (!Pigeonholes__countbirds__L_2__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___205)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:10] 
+                                             ([sloc:pigeonholes.adb:25] 
+                                             (if
+                                             ([sloc:pigeonholes.adb:25] ([branch_id=925]
+                                             _gnatprove_standard.Main.spark__branch
+                                             :=
+                                             ((Pigeonholes__box__rep.to_rep
+                                                 (Array__Int__Pigeonholes__box.get
+                                                    Pigeonholes__countbirds__d.d
+                                                    !Pigeonholes__countbirds__L_2__i.i))
+                                                = Pigeonholes__countbirds__b.b)));
+                                             ([branch_id=925] _gnatprove_standard.Main.spark__branch).bool__content
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:27] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:33] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:30] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             ( ([sloc:pigeonholes.adb:25] 
+                                               ([comment:         if d(I) = b then bs := bs + 1; else bs := bs; end if;                                    ^ pigeonholes.adb:25:36:VC_OVERFLOW_CHECK]
+                                               [vc:annotation]
+                                               [GP_Reason:VC_OVERFLOW_CHECK]
+                                               [GP_Sloc:pigeonholes.adb:25:36]
+                                               [GP_Shape:L_2_while__if__bs_assign__add]
+                                               [GP_Id:5] (Standard__integer.range_check_
+                                                            (!Pigeonholes__countbirds__bs.bs
+                                                               + 1))))))))
+                                              else
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:46] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:52] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:49] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             !Pigeonholes__countbirds__bs.bs))))))
+                                             );
+                                             (
+                                             Pigeonholes__countbirds__L_2__i.i
+                                             :=
+                                             5);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___204)
+                                                   <= !Pigeonholes__countbirds__L_2__i.i)
+                                                (!Pigeonholes__countbirds__L_2__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___205)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:10] 
+                                             ([sloc:pigeonholes.adb:25] 
+                                             (if
+                                             ([sloc:pigeonholes.adb:25] ([branch_id=925]
+                                             _gnatprove_standard.Main.spark__branch
+                                             :=
+                                             ((Pigeonholes__box__rep.to_rep
+                                                 (Array__Int__Pigeonholes__box.get
+                                                    Pigeonholes__countbirds__d.d
+                                                    !Pigeonholes__countbirds__L_2__i.i))
+                                                = Pigeonholes__countbirds__b.b)));
+                                             ([branch_id=925] _gnatprove_standard.Main.spark__branch).bool__content
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:27] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:33] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:30] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             ( ([sloc:pigeonholes.adb:25] 
+                                               ([comment:         if d(I) = b then bs := bs + 1; else bs := bs; end if;                                    ^ pigeonholes.adb:25:36:VC_OVERFLOW_CHECK]
+                                               [vc:annotation]
+                                               [GP_Reason:VC_OVERFLOW_CHECK]
+                                               [GP_Sloc:pigeonholes.adb:25:36]
+                                               [GP_Shape:L_2_while__if__bs_assign__add]
+                                               [GP_Id:5] (Standard__integer.range_check_
+                                                            (!Pigeonholes__countbirds__bs.bs
+                                                               + 1))))))))
+                                              else
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:25:46] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:52] 
+                                             ([sloc:pigeonholes.adb:25] ()));
+                                             ([GP_Sloc:pigeonholes.adb:25:49] 
+                                             ([sloc:pigeonholes.adb:25] (
+                                             Pigeonholes__countbirds__bs.bs
+                                             :=
+                                             !Pigeonholes__countbirds__bs.bs))))))
+                                             ) with
+                                           | Pigeonholes__countbirds__L_2.L_2 
+                                           -> ())))));
+          ([GP_Sloc:pigeonholes.adb:27:14] ([sloc:pigeonholes.adb:27] ()));
+          ([GP_Sloc:pigeonholes.adb:27:7] ([sloc:pigeonholes.adb:27] (
+                                          pigeonholes__countbirds__result :=
+                                          !Pigeonholes__countbirds__bs.bs);
+                                          raise Return__exc));
+          raise Return__exc with | Return__exc  -> ());
+        abstract ensures
+        { True } begin  (let _ =
+                       (_gnatprove_standard.Boolean.andb
+                          (!pigeonholes__countbirds__result >= 0)
+                          (!pigeonholes__countbirds__result <= 5))
+                       in ())  end;
+        !pigeonholes__countbirds__result
+
+end

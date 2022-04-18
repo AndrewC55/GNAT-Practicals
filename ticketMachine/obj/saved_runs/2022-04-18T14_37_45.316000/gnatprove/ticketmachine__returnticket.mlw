@@ -1,0 +1,340 @@
+module Ticketmachine__serving
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val serving : int__ref
+end
+
+module Ticketmachine__next
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val next : int__ref
+end
+
+module Ticketmachine__invariant
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val function invariant__ (Ticketmachine__serving___serving___: int) (Ticketmachine__next___next___: int) : 
+    bool
+  
+  val predicate invariant____function_guard (temp___result_161: bool) (Ticketmachine__serving___serving___: int) (Ticketmachine__next___next___: int)
+end
+
+module Ticketmachine__tickets
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type tickets = <range 0 1000>
+  
+  val function first : int
+    ensures { result = (0 : int) }
+  
+  val function last : int
+    ensures { result = (1000 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = tickets,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type tickets__ref = { mutable tickets__content : tickets }
+  
+  function tickets__ref_tickets__content__projection (a: tickets__ref) : tickets =
+    a.tickets__content
+  
+  meta "model_projection" function tickets__ref_tickets__content__projection
+  
+  meta "inline:no" function tickets__ref_tickets__content__projection
+  
+  val tickets__havoc (x: tickets__ref) : unit
+    writes { x }
+end
+
+module Ticketmachine__tickets___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Ticketmachine__tickets as Ticketmachine__tickets
+  
+  predicate dynamic_invariant (temp___expr_166: int) (temp___is_init_162: bool) (temp___skip_constant_163: bool) (temp___do_toplevel_164: bool) (temp___do_typ_inv_165: bool) =
+    if ((temp___is_init_162 = True) \/
+          (Ticketmachine__tickets.first <= Ticketmachine__tickets.last)) then
+      (((Ticketmachine__tickets.dynamic_property Ticketmachine__tickets.first)
+          Ticketmachine__tickets.last)
+         temp___expr_166)
+    else true
+  
+  val dynamic_invariant (temp___expr_166: int) (temp___is_init_162: bool) (temp___skip_constant_163: bool) (temp___do_toplevel_164: bool) (temp___do_typ_inv_165: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_166 : int))
+                      (temp___is_init_162 : bool))
+                     (temp___skip_constant_163 : bool))
+                    (temp___do_toplevel_164 : bool))
+                   (temp___do_typ_inv_165 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_167: int) (temp___skip_top_level_168: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_167: int) (temp___skip_top_level_168: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_167 : int))
+                   (temp___skip_top_level_168 : bool)) }
+end
+
+module Ticketmachine__invariant___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Ticketmachine__serving as Ticketmachine__serving
+  use Ticketmachine__next as Ticketmachine__next
+  use Ticketmachine__invariant as Ticketmachine__invariant
+  use Ticketmachine__tickets___axiom as Ticketmachine__tickets___axiom
+  
+  val invariant__ (__void_param: unit) : bool
+    reads { Ticketmachine__serving.serving, Ticketmachine__next.next }
+    requires { true }
+    writes {  }
+    ensures { (((result
+                   = ((Ticketmachine__invariant.invariant__
+                         (Ticketmachine__serving.serving.int__content))
+                        (Ticketmachine__next.next.int__content))) /\
+                  (((Ticketmachine__invariant.invariant____function_guard
+                       result)
+                      (Ticketmachine__serving.serving.int__content))
+                     (Ticketmachine__next.next.int__content))) /\
+                 (result
+                    = ((Ticketmachine__serving.serving.int__content)
+                         <= (Ticketmachine__next.next.int__content)))) }
+  
+  axiom invariant____post_axiom:
+    forall Ticketmachine__serving___serving___ : int, Ticketmachine__next___next___ : int
+          [(Ticketmachine__invariant.invariant__
+              Ticketmachine__serving___serving___)
+             Ticketmachine__next___next___].
+      (((((((Ticketmachine__tickets___axiom.dynamic_invariant
+               Ticketmachine__serving___serving___)
+              True)
+             True)
+            True)
+           True) /\
+          (((((Ticketmachine__tickets___axiom.dynamic_invariant
+                 Ticketmachine__next___next___)
+                True)
+               True)
+              True)
+             True)) ->
+         (let result =
+            (Ticketmachine__invariant.invariant__
+               Ticketmachine__serving___serving___)
+              Ticketmachine__next___next___ in
+          if (((Ticketmachine__invariant.invariant____function_guard result)
+                 Ticketmachine__serving___serving___)
+                Ticketmachine__next___next___) then
+            ((true /\ true) /\ true)
+          else true))
+  
+  axiom invariant____def_axiom:
+    forall Ticketmachine__serving___serving___ : int, Ticketmachine__next___next___ : int
+          [(Ticketmachine__invariant.invariant__
+              Ticketmachine__serving___serving___)
+             Ticketmachine__next___next___].
+      (((Ticketmachine__invariant.invariant__
+           Ticketmachine__serving___serving___)
+          Ticketmachine__next___next___)
+         = (Ticketmachine__serving___serving___
+              <= Ticketmachine__next___next___))
+end
+
+module Ticketmachine__returnticket__k
+  use _gnatprove_standard.Main
+  use int.Int
+  
+  val function k : int
+end
+
+module Ticketmachine__serving___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Ticketmachine__next___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Ticketmachine__returnticket__k___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Ticketmachine__returnticket__subprogram_def
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use _gnatprove_standard.Main as Main
+  use _gnatprove_standard.Boolean as Boolean
+  use Ticketmachine__serving as Ticketmachine__serving
+  use Ticketmachine__next as Ticketmachine__next
+  use Ticketmachine__invariant as Ticketmachine__invariant
+  use Ticketmachine__invariant___axiom as Ticketmachine__invariant___axiom
+  use Ticketmachine__returnticket__k as Ticketmachine__returnticket__k
+  use Ticketmachine__tickets as Ticketmachine__tickets
+  use Ticketmachine__tickets___axiom as Ticketmachine__tickets___axiom
+  use Ticketmachine__tickets___axiom as Ticketmachine__tickets___axiom
+  use Ticketmachine__serving___axiom as Ticketmachine__serving___axiom
+  use Ticketmachine__next___axiom as Ticketmachine__next___axiom
+  use Ticketmachine__invariant___axiom as Ticketmachine__invariant___axiom
+  use Ticketmachine__returnticket__k___axiom as Ticketmachine__returnticket__k___axiom
+  
+  let def (__void_param : unit)
+    requires { [#"ticketmachine.ads" 22 0 0] true }
+    ensures { [#"ticketmachine.ads" 22 0 0]
+              [#"ticketmachine.ads" 25 0 0]
+              [@GP_Reason:VC_POSTCONDITION]
+              [@GP_Sloc:ticketmachine.ads:25:14]
+              [@model_vc_post]
+              [@GP_Shape:pragargs__and]
+              [@GP_Id:5]
+              [@comment:     Post => Invariant and (next = next or next = next'Old + 1);              ^ ticketmachine.ads:25:14:VC_POSTCONDITION]
+              (([@GP_Pretty_Ada:998]
+                [@GP_Sloc:ticketmachine.ads:25:14]
+                ((epsilon temp___result_187: bool.
+                    ((temp___result_187
+                        = ((Ticketmachine__invariant.invariant__
+                              (Ticketmachine__serving.serving.int__content))
+                             (Ticketmachine__next.next.int__content))) /\
+                       (((Ticketmachine__invariant.invariant____function_guard
+                            temp___result_187)
+                           (Ticketmachine__serving.serving.int__content))
+                          (Ticketmachine__next.next.int__content))))
+                   = True)) /\
+                 ([@GP_Pretty_Ada:1004]
+                  [@GP_Sloc:ticketmachine.ads:25:28]
+                  (((Ticketmachine__next.next.int__content)
+                      = (Ticketmachine__next.next.int__content)) \/
+                     ((Ticketmachine__next.next.int__content)
+                        = ((old (Ticketmachine__next.next.int__content))
+                             + (1 : int)))))) }
+  = [@vc:divergent]
+    (([@GNAT-comment:Assume dynamic invariants of inputs of the subprogram ticketmachine.ads:22]
+      ());
+     assume {
+       ((((Ticketmachine__tickets___axiom.dynamic_invariant
+             (Ticketmachine__serving.serving.int__content))
+            True)
+           False)
+          True)
+         True };
+     assume {
+       ((((Ticketmachine__tickets___axiom.dynamic_invariant
+             (Ticketmachine__next.next.int__content))
+            True)
+           False)
+          True)
+         True };
+     assume {
+       ((((Ticketmachine__tickets___axiom.dynamic_invariant
+             Ticketmachine__returnticket__k.k)
+            True)
+           False)
+          True)
+         True };
+     ([@GNAT-comment:Assume moved pointers in outputs of the subprogram ticketmachine.ads:22]
+      ());
+     ([@GNAT-comment:Check for RTE in the Pre of the subprogram ticketmachine.ads:22]
+      ());
+     (begin
+        ensures { true }
+        let _ =
+          let _ =
+            ((Ticketmachine__serving.serving.int__content)
+               < (Ticketmachine__next.next.int__content))
+             && (Ticketmachine__invariant___axiom.invariant__ ()) in
+          () in
+        ()
+      end);
+     ([@GNAT-comment:Assume Pre of the subprogram ticketmachine.ads:22] ());
+     assume {
+       (([@GP_Pretty_Ada:992]
+         ((Ticketmachine__serving.serving.int__content)
+            < (Ticketmachine__next.next.int__content))) /\
+          ([@GP_Pretty_Ada:993]
+           ((epsilon temp___result_186: bool.
+               ((temp___result_186
+                   = ((Ticketmachine__invariant.invariant__
+                         (Ticketmachine__serving.serving.int__content))
+                        (Ticketmachine__next.next.int__content))) /\
+                  (((Ticketmachine__invariant.invariant____function_guard
+                       temp___result_186)
+                      (Ticketmachine__serving.serving.int__content))
+                     (Ticketmachine__next.next.int__content))))
+              = True))) };
+     (let temp___old_185 = Ticketmachine__next.next.int__content in
+      (try
+         ([@GP_Sloc:ticketmachine.adb:16:14] [#"ticketmachine.adb" 16 0 0] ());
+         ([@GP_Sloc:ticketmachine.adb:16:7]
+          [#"ticketmachine.adb" 16 0 0]
+          (if (([#"ticketmachine.adb" 16 0 0]
+                [#"ticketmachine.adb" 16 0 0]
+                (([@branch_id=851] Main.spark__branch).bool__content <-
+                   (Ticketmachine__returnticket__k.k
+                      = ((Ticketmachine__next.next.int__content) - (1 : int)))));
+               (([@branch_id=851] Main.spark__branch).bool__content)) then
+             (([@GP_Sloc:ticketmachine.adb:16:28]
+               [#"ticketmachine.adb" 16 0 0] ());
+              ([@GP_Sloc:ticketmachine.adb:16:36]
+               [#"ticketmachine.adb" 16 0 0] ());
+              ([@GP_Sloc:ticketmachine.adb:16:33]
+               [#"ticketmachine.adb" 16 0 0]
+               [#"ticketmachine.adb" 16 0 0]
+               (Ticketmachine__next.next.int__content <-
+                  ([#"ticketmachine.adb" 16 0 0]
+                   [@GP_Shape:if__next_assign__sub]
+                   [@GP_Sloc:ticketmachine.adb:16:41]
+                   [@vc:annotation]
+                   [@GP_Reason:VC_RANGE_CHECK]
+                   [@comment:      if k = next - 1 then next := next - 1; else next := next; end if;                                         ^ ticketmachine.adb:16:41:VC_RANGE_CHECK]
+                   [@GP_Id:4]
+                   (Ticketmachine__tickets.range_check_
+                      ((Ticketmachine__next.next.int__content) - (1 : int)))))))
+           else
+             (([@GP_Sloc:ticketmachine.adb:16:51]
+               [#"ticketmachine.adb" 16 0 0] ());
+              ([@GP_Sloc:ticketmachine.adb:16:59]
+               [#"ticketmachine.adb" 16 0 0] ());
+              ([@GP_Sloc:ticketmachine.adb:16:56]
+               [#"ticketmachine.adb" 16 0 0]
+               [#"ticketmachine.adb" 16 0 0]
+               (Ticketmachine__next.next.int__content <-
+                  (Ticketmachine__next.next.int__content))))));
+         (raise Return__exc)
+       with Return__exc -> ()
+       end);
+      (begin
+         ensures { true }
+         let _ =
+           let _ =
+             (Boolean.andb (Ticketmachine__invariant___axiom.invariant__ ()))
+               ((Boolean.orb
+                   ((Ticketmachine__next.next.int__content)
+                      = (Ticketmachine__next.next.int__content)))
+                  ((Ticketmachine__next.next.int__content)
+                     = (temp___old_185 + (1 : int)))) in
+           () in
+         ()
+       end)))
+end

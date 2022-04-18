@@ -1,0 +1,7 @@
+20220418112412
+-c
+-x
+ada
+-gnatA
+-gnatc
+-gnates=C:\GNAT\Practicals\obj\gnatprove\1068fc33.tmp

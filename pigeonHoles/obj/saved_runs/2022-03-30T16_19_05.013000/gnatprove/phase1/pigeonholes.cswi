@@ -1,0 +1,7 @@
+20220330151904
+-c
+-x
+ada
+-gnatA
+-gnatc
+-gnates=C:\GNAT\Practicals\pigeonHoles\obj\gnatprove\aa176a6a.tmp

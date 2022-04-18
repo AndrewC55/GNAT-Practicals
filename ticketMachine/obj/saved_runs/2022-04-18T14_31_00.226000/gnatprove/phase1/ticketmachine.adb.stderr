@@ -1,0 +1,4 @@
+ticketmachine.ads:22:31: error: identifier expected
+ticketmachine.ads:25:24: error: identifier expected
+ticketmachine.ads:29:19: error: identifier expected
+ticketmachine.ads:29:01: error: missing "end TicketMachine;"

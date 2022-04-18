@@ -1,0 +1,1 @@
+pigeonholes.ads:9:39: medium: postcondition might fail, cannot prove d(J) /= Pigeon [possible fix: loop at pigeonholes.adb:8 should mention d in a loop invariant][#0]

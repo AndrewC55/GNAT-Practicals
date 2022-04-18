@@ -1,0 +1,930 @@
+(* Module for axiomatizing type "box" defined at pigeonholes.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Pigeonholes__box
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type box  
+  
+  function   first () requires { True } ensures  { True } returns int = 0
+  
+  function   last () requires { True } ensures  { True } returns int = 1
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = box,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type box__ref  = { mutable box__content : box }
+  
+  function   box__ref_box__content__projection (a : box__ref) requires {  }
+    ensures  {  } returns box = a.box__content
+  
+  meta model_projection function box__ref_box__content__projection
+  
+  meta inline:no function box__ref_box__content__projection
+  
+  function   box__havoc (x : box__ref) requires {  } ensures  {  } returns
+    unit
+
+end
+
+(* Module defining to_rep/of_rep for type "box" defined at pigeonholes.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Pigeonholes__box__rep
+  
+  use        Pigeonholes__box
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  clone export ada__model.Rep_Proj_Int with axiom . type t = Pigeonholes__box.box,
+    predicate in_range = Pigeonholes__box.in_range
+  
+  meta model_projection function to_rep
+  
+  meta inline:no function to_rep
+
+end
+
+(* Module for axiomatizing the array theory associated to type "TpigeonholeB" defined at pigeonholes.ads:6, created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int__Pigeonholes__box
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Pigeonholes__box
+  use        Pigeonholes__box__rep
+  
+  function   index_I1_one () requires { True } ensures  { True } returns
+    int = 1
+  
+  type component_type  = --pp_transparent_type_definition NOT IMPLEMENTED
+  
+  clone export _gnatprove_standard.Array__1 with axiom . type I1.t = int,
+    predicate I1.le = <=, predicate I1.lt = <, predicate I1.gt = >,
+    function I1.add = +, function I1.sub = -, function I1.one = index_I1_one,
+    type component_type = component_type
+  
+  function   bool_eq
+    (a : map a__first : int a__last : int b : map b__first : int
+    b__last : int) requires { True } ensures  { True } returns
+    bool = ((if (a__first <= a__last) then
+            ((b__first <= b__last) /\
+               ((a__last - a__first) = (b__last - b__first)))
+             else (b__first > b__last)) /\
+              --pp_universal_quantif NOT IMPLEMENTED)
+  
+  axiom bool_eq_rev : --pp_universal_quantif NOT IMPLEMENTED
+
+end
+
+(* Module for defining a ref holding the value of variable "d" defined at pigeonholes.ads:18, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__dovebegone__d
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Array__Int__Pigeonholes__box
+  
+  val d [name:d] [model_trace:1115]
+  [model_projected] [sloc:pigeonholes.ads:18]: Array__Int__Pigeonholes__box.map
+
+end
+
+(* Module for defining a ref holding the value of variable "a" defined at pigeonholes.adb:41, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__dovebegone__a
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val a [name:a] [model_trace:971]
+  [model_projected] [sloc:pigeonholes.adb:41]: int
+
+end
+
+(* Module for defining a ref holding the value of variable "b" defined at pigeonholes.adb:42, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__dovebegone__b
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val b [name:b] [model_trace:978]
+  [model_projected] [sloc:pigeonholes.adb:42]: int
+
+end
+
+(* Module for defining the constant "R9b" defined at pigeonholes.adb:44, created in Gnat2Why.Decls.Translate_Constant *)
+module Pigeonholes__dovebegone__L_3__R9b
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function  [sloc:pigeonholes.adb:44] r9b () requires {  } ensures  {  }
+    returns int
+
+end
+
+(* Module for defining the constant "R10b" defined at pigeonholes.adb:44, created in Gnat2Why.Decls.Translate_Constant *)
+module Pigeonholes__dovebegone__L_3__R10b
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function  [sloc:pigeonholes.adb:44] r10b () requires {  } ensures  {  }
+    returns int
+
+end
+
+(* Module for defining a ref holding the value of variable "i" defined at pigeonholes.adb:44, created in Gnat2Why.Decls.Translate_Variable *)
+module Pigeonholes__dovebegone__L_3__i
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val i [model_projected] [name:I]
+  [model_trace:986] [sloc:pigeonholes.adb:44]: int
+
+end
+
+(* Module for axiomatizing type "ph_index" defined at pigeonholes.ads:5, created in Gnat2Why.Types.Translate_Type *)
+module Pigeonholes__ph_index
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type ph_index  = <range 1 20>
+  
+  function   first () requires { True } ensures  { True } returns int = 1
+  
+  function   last () requires { True } ensures  { True } returns int = 20
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = ph_index,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type ph_index__ref  = { mutable ph_index__content : ph_index }
+  
+  function   ph_index__ref_ph_index__content__projection (a : ph_index__ref)
+    requires {  } ensures  {  } returns ph_index = a.ph_index__content
+  
+  meta model_projection function ph_index__ref_ph_index__content__projection
+  
+  meta inline:no function ph_index__ref_ph_index__content__projection
+  
+  function   ph_index__havoc (x : ph_index__ref) requires {  } ensures  {  }
+    returns unit
+
+end
+
+(* Module giving axioms for type "ph_index" defined at pigeonholes.ads:5, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Pigeonholes__ph_index___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Pigeonholes__ph_index
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_174) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_170) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_171) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_172) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_173) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_170) = True) \/
+          (Pigeonholes__ph_index.first <= Pigeonholes__ph_index.last))
+       then
+       (Pigeonholes__ph_index.dynamic_property Pigeonholes__ph_index.first
+          Pigeonholes__ph_index.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_174))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_175) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_176) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving axioms for type "pigeonhole" defined at pigeonholes.ads:6, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Pigeonholes__pigeonhole___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use        Array__Int__Pigeonholes__box
+  use        Array__Int__Pigeonholes__box
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol]
+    [introduced] temp___expr_181) : Array__Int__Pigeonholes__box.map
+    ([mlw:proxy_symbol] [introduced] temp___is_init_177) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_178) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_179) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_180) : bool) requires
+    { True } ensures  { True } returns  = True
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol]
+    [introduced] temp___expr_183) : Array__Int__Pigeonholes__box.map
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_184) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module for defining the loop exit exception for the loop "L_3" defined at pigeonholes.adb:44, created in Gnat2Why.Decls.Translate_Loop_Entity *)
+module Pigeonholes__dovebegone__L_3
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  --pp_exception_declaration NOT IMPLEMENTED
+
+end
+
+(* Module giving an empty axiom for the entity "a" defined at pigeonholes.adb:41, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__dovebegone__a___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "b" defined at pigeonholes.adb:42, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__dovebegone__b___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "i" defined at pigeonholes.adb:44, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__dovebegone__L_3__i___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "L_3" defined at pigeonholes.adb:44, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__dovebegone__L_3___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving axioms for type "box" defined at pigeonholes.ads:4, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Pigeonholes__box___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Pigeonholes__box
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_167) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_163) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_164) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_165) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_166) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_163) = True) \/
+          (Pigeonholes__box.first <= Pigeonholes__box.last))
+       then
+       (Pigeonholes__box.dynamic_property Pigeonholes__box.first
+          Pigeonholes__box.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_167))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_168) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_169) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving an empty axiom for the entity "d" defined at pigeonholes.ads:18, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Pigeonholes__dovebegone__d___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for defining the value of constant "R9b" defined at pigeonholes.adb:44, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Pigeonholes__dovebegone__L_3__R9b___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for defining the value of constant "R10b" defined at pigeonholes.adb:44, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Pigeonholes__dovebegone__L_3__R10b___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "dovebegone" defined at pigeonholes.ads:18, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Pigeonholes__dovebegone__subprogram_def
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        _gnatprove_standard.Boolean
+  use        Array__Int__Pigeonholes__box
+  use        Pigeonholes__dovebegone__d
+  use        Pigeonholes__dovebegone__a
+  use        Pigeonholes__dovebegone__b
+  use        Pigeonholes__dovebegone__L_3__R9b
+  use        Pigeonholes__dovebegone__L_3__R10b
+  use        Pigeonholes__dovebegone__L_3__i
+  use        Pigeonholes__box
+  use        Pigeonholes__box__rep
+  use        Pigeonholes__ph_index___axiom
+  use        Array__Int__Pigeonholes__box
+  use        Pigeonholes__pigeonhole___axiom
+  use        Pigeonholes__dovebegone__L_3
+  use        Pigeonholes__dovebegone__a___axiom
+  use        Pigeonholes__dovebegone__b___axiom
+  use        Pigeonholes__dovebegone__L_3__i___axiom
+  use        Pigeonholes__dovebegone__L_3___axiom
+  use        Pigeonholes__box___axiom
+  use        Pigeonholes__ph_index___axiom
+  use        Pigeonholes__pigeonhole___axiom
+  use        Pigeonholes__dovebegone__d___axiom
+  use        Pigeonholes__dovebegone__L_3__R9b___axiom
+  use        Pigeonholes__dovebegone__L_3__R10b___axiom
+  
+  function [GP_Subp:pigeonholes.ads:18] [sloc:pigeonholes.ads:18] def
+    (__void_param : unit) requires { True } ensures 
+    { ([sloc:pigeonholes.ads:19] ([GP_Shape:pragargs__forall]
+                                 [GP_Reason:VC_POSTCONDITION]
+                                 [comment:     Post => (for all J in d'Range => d(J) /= Dove); -- for all (absolute) or for some              ^ pigeonholes.ads:19:14:VC_POSTCONDITION]
+                                 [GP_Sloc:pigeonholes.ads:19:14]
+                                 [model_vc_post]
+                                 [GP_Id:8] --pp_universal_quantif NOT IMPLEMENTED)) }
+    returns
+     = (* Assume dynamic invariants of inputs of the subprogram pigeonholes.ads:18 *);
+        assume
+        { (Pigeonholes__pigeonhole___axiom.dynamic_invariant
+             !Pigeonholes__dovebegone__d.d True False True True) };
+        (* Assume moved pointers in outputs of the subprogram pigeonholes.ads:18 *);
+        (* Check for RTE in the Pre of the subprogram pigeonholes.ads:18 *);
+        abstract ensures
+        { True } begin  (let _ = True in ())  end;
+        (* Assume Pre of the subprogram pigeonholes.ads:18 *);
+        (try
+        ();
+          ([sloc:pigeonholes.adb:41] ( Pigeonholes__dovebegone__a.a :=
+          ( 1));
+          assume
+          { (Pigeonholes__ph_index___axiom.dynamic_invariant
+               !Pigeonholes__dovebegone__a.a True False True True) });
+          ([sloc:pigeonholes.adb:42] ( Pigeonholes__dovebegone__b.b :=
+          ( 20));
+          assume
+          { (Pigeonholes__ph_index___axiom.dynamic_invariant
+               !Pigeonholes__dovebegone__b.b True False True True) });
+          ([sloc:pigeonholes.adb:44] ());
+          ();
+          ([GP_Sloc:pigeonholes.adb:44:16] ([sloc:pigeonholes.adb:44] ()));
+          ([GP_Sloc:pigeonholes.adb:44:19] ([sloc:pigeonholes.adb:44] ()));
+          ([GP_Sloc:pigeonholes.adb:44:16] ([sloc:pigeonholes.adb:44] 
+                                           ([sloc:pigeonholes.adb:44] (let pigeonholes__dovebegone__L_3__R9b__assume
+                                           = !Pigeonholes__dovebegone__a.a in
+                                           assume
+                                           { (pigeonholes__dovebegone__L_3__R9b__assume
+                                                = Pigeonholes__dovebegone__L_3__R9b.r9b) });
+                                           assume
+                                           { (Pigeonholes__ph_index___axiom.dynamic_invariant
+                                                Pigeonholes__dovebegone__L_3__R9b.r9b
+                                                True False True True) })));
+          ([GP_Sloc:pigeonholes.adb:44:19] ([sloc:pigeonholes.adb:44] 
+                                           ([sloc:pigeonholes.adb:44] (let pigeonholes__dovebegone__L_3__R10b__assume
+                                           = !Pigeonholes__dovebegone__b.b in
+                                           assume
+                                           { (pigeonholes__dovebegone__L_3__R10b__assume
+                                                = Pigeonholes__dovebegone__L_3__R10b.r10b) });
+                                           assume
+                                           { (Pigeonholes__ph_index___axiom.dynamic_invariant
+                                                Pigeonholes__dovebegone__L_3__R10b.r10b
+                                                True False True True) })));
+          ([GP_Sloc:pigeonholes.adb:44:21] ([sloc:pigeonholes.adb:44] (let ([mlw:proxy_symbol]
+                                           [introduced] temp___216) =
+                                           Pigeonholes__dovebegone__L_3__R9b.r9b
+                                           in (let ([mlw:proxy_symbol]
+                                           [introduced] temp___217) =
+                                           Pigeonholes__dovebegone__L_3__R10b.r10b
+                                           in
+                                           (* Translation of an unrolled Ada loop from pigeonholes.adb:44 *);
+                                           (try
+                                           (let temp___loop_entry_219 =
+                                             !Pigeonholes__dovebegone__d.d in
+                                             (* Unrolling of the loop statements of loop pigeonholes.adb:44 *);
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             1);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             2);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             3);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             4);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             5);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             6);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             7);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             8);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             9);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             10);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             11);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             12);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             13);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             14);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             15);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             16);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             17);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             18);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             19);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             );
+                                             (
+                                             Pigeonholes__dovebegone__L_3__i.i
+                                             :=
+                                             20);
+                                             (if
+                                             (_gnatprove_standard.Boolean.andb
+                                                (([mlw:proxy_symbol]
+                                                   [introduced] temp___216)
+                                                   <= !Pigeonholes__dovebegone__L_3__i.i)
+                                                (!Pigeonholes__dovebegone__L_3__i.i
+                                                   <= ([mlw:proxy_symbol]
+                                                   [introduced] temp___217)))
+                                             then
+                                             ();
+                                             ([GP_Sloc:pigeonholes.adb:45:15] 
+                                             ([sloc:pigeonholes.adb:45] (
+                                             Pigeonholes__dovebegone__d.d :=
+                                             (Array__Int__Pigeonholes__box.set
+                                                !Pigeonholes__dovebegone__d.d
+                                                !Pigeonholes__dovebegone__L_3__i.i
+                                                (Pigeonholes__box__rep.of_rep
+                                                   ( 0))))))
+                                             )) with
+                                           | Pigeonholes__dovebegone__L_3.L_3 
+                                           -> ())))));
+          raise Return__exc with | Return__exc  -> ());
+        abstract ensures
+        { True } begin  (let _ = (let j = ( any  pre {} post {} return int)
+                       in
+                       (if
+                       (_gnatprove_standard.Boolean.andb (1 <= j) (j <= 20))
+                       then
+                       abstract ensures
+                       { True } begin  (let _ =
+                                      ((Pigeonholes__box__rep.to_rep
+                                          (Array__Int__Pigeonholes__box.get
+                                             !Pigeonholes__dovebegone__d.d j))
+                                         <> 1)
+                                      in ())  end
+                       ));
+                       ( any  pre {} post
+                       {((result = True) <->
+                           --pp_universal_quantif NOT IMPLEMENTED)}
+                       return bool) in ())  end
+
+end

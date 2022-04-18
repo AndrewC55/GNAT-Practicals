@@ -1,0 +1,313 @@
+(* Module for defining a ref holding the value of variable "serving" defined at ticketmachine.ads:5, created in Gnat2Why.Decls.Translate_Variable *)
+module Ticketmachine__serving
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val serving [name:serving] [model_projected]
+  [model_trace:888] [sloc:ticketmachine.ads:5]: int
+
+end
+
+(* Module for defining a ref holding the value of variable "next" defined at ticketmachine.ads:6, created in Gnat2Why.Decls.Translate_Variable *)
+module Ticketmachine__next
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  val next [model_trace:892] [model_projected]
+  [name:next] [sloc:ticketmachine.ads:6]: int
+
+end
+
+(* Module for possibly declaring a logic function for "invariant" defined at ticketmachine.ads:8, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Ticketmachine__invariant
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function   invariant__
+    (Ticketmachine__serving___serving___ : int
+    Ticketmachine__next___next___ : int) requires { True } ensures  { True }
+    returns bool
+  
+  function   invariant____function_guard
+    (([mlw:proxy_symbol] [introduced] temp___result_161) : bool
+    Ticketmachine__serving___serving___ : int
+    Ticketmachine__next___next___ : int) requires { True } ensures  { True }
+    returns bool
+
+end
+
+(* Module for axiomatizing type "tickets" defined at ticketmachine.ads:4, created in Gnat2Why.Types.Translate_Type *)
+module Ticketmachine__tickets
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  
+  type tickets  = <range 0 1000>
+  
+  function   first () requires { True } ensures  { True } returns int = 0
+  
+  function   last () requires { True } ensures  { True } returns int = 1000
+  
+  function   in_range (x : int) requires { True } ensures  { True } returns
+     = ((first <= x) /\ (x <= last))
+  
+  clone export ada__model.Static_Discrete with axiom . type t = tickets,
+    function first = first, function last = last,
+    predicate in_range = in_range
+  
+  type tickets__ref  = { mutable tickets__content : tickets }
+  
+  function   tickets__ref_tickets__content__projection (a : tickets__ref)
+    requires {  } ensures  {  } returns tickets = a.tickets__content
+  
+  meta model_projection function tickets__ref_tickets__content__projection
+  
+  meta inline:no function tickets__ref_tickets__content__projection
+  
+  function   tickets__havoc (x : tickets__ref) requires {  } ensures  {  }
+    returns unit
+
+end
+
+(* Module giving axioms for type "tickets" defined at ticketmachine.ads:4, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Ticketmachine__tickets___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Ticketmachine__tickets
+  
+  function   dynamic_invariant
+    (([mlw:proxy_symbol] [introduced] temp___expr_166) : int
+    ([mlw:proxy_symbol] [introduced] temp___is_init_162) : bool
+    ([mlw:proxy_symbol] [introduced] temp___skip_constant_163) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_toplevel_164) : bool
+    ([mlw:proxy_symbol] [introduced] temp___do_typ_inv_165) : bool) requires
+    { True } ensures  { True } returns
+     = (if
+       ((([mlw:proxy_symbol] [introduced] temp___is_init_162) = True) \/
+          (Ticketmachine__tickets.first <= Ticketmachine__tickets.last))
+       then
+       (Ticketmachine__tickets.dynamic_property Ticketmachine__tickets.first
+          Ticketmachine__tickets.last ([mlw:proxy_symbol]
+          [introduced] temp___expr_166))
+       )
+  
+  function   default_initial_assumption
+    (([mlw:proxy_symbol] [introduced] temp___expr_167) : int
+    ([mlw:proxy_symbol] [introduced] temp___skip_top_level_168) : bool)
+    requires { True } ensures  { True } returns  = True
+
+end
+
+(* Module giving a program function and a defining axiom for the expression function "invariant" defined at ticketmachine.ads:8, created in Gnat2Why.Subprograms.Translate_Expression_Function_Body *)
+module Ticketmachine__invariant___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        Ticketmachine__serving
+  use        Ticketmachine__next
+  use        Ticketmachine__invariant
+  use        Ticketmachine__tickets___axiom
+  
+  function   invariant__ (__void_param : unit) requires { True } ensures 
+    { ((result
+          = (Ticketmachine__invariant.invariant__
+               !Ticketmachine__serving.serving !Ticketmachine__next.next)) /\
+         (Ticketmachine__invariant.invariant____function_guard result
+            !Ticketmachine__serving.serving !Ticketmachine__next.next) /\
+         (result
+            = (!Ticketmachine__serving.serving <= !Ticketmachine__next.next))) }
+    returns bool
+  
+  axiom invariant____post_axiom : --pp_universal_quantif NOT IMPLEMENTED
+  
+  axiom invariant____def_axiom : --pp_universal_quantif NOT IMPLEMENTED
+
+end
+
+(* Module for defining the constant "k" defined at ticketmachine.ads:22, created in Gnat2Why.Decls.Translate_Constant *)
+module Ticketmachine__returnticket__k
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  function [model_trace:972] [name:k] [sloc:ticketmachine.ads:22] k ()
+    requires {  } ensures  {  } returns int
+
+end
+
+(* Module giving an empty axiom for the entity "serving" defined at ticketmachine.ads:5, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Ticketmachine__serving___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "next" defined at ticketmachine.ads:6, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Ticketmachine__next___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module giving an empty axiom for the entity "k" defined at ticketmachine.ads:22, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Ticketmachine__returnticket__k___axiom
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  
+  
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "returnticket" defined at ticketmachine.ads:22, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Ticketmachine__returnticket__subprogram_def
+  
+  use import _gnatprove_standard.Main
+  use import int.Int
+  use import int.Int
+  use        _gnatprove_standard.Main
+  use        _gnatprove_standard.Boolean
+  use        Ticketmachine__serving
+  use        Ticketmachine__next
+  use        Ticketmachine__invariant
+  use        Ticketmachine__invariant___axiom
+  use        Ticketmachine__returnticket__k
+  use        Ticketmachine__tickets
+  use        Ticketmachine__tickets___axiom
+  use        Ticketmachine__tickets___axiom
+  use        Ticketmachine__serving___axiom
+  use        Ticketmachine__next___axiom
+  use        Ticketmachine__invariant___axiom
+  use        Ticketmachine__returnticket__k___axiom
+  
+  function [GP_Subp:ticketmachine.ads:22] [sloc:ticketmachine.ads:22] def
+    (__void_param : unit) requires { True } ensures 
+    { ([sloc:ticketmachine.ads:25] ([GP_Reason:VC_POSTCONDITION]
+                                   [GP_Sloc:ticketmachine.ads:25:14]
+                                   [model_vc_post] [GP_Shape:pragargs__and]
+                                   [GP_Id:5]
+                                   [comment:     Post => Invariant and (next = next or next = next'Old + 1);              ^ ticketmachine.ads:25:14:VC_POSTCONDITION] (
+                                   ([GP_Pretty_Ada:998]
+                                   [GP_Sloc:ticketmachine.ads:25:14] (
+                                   (epsilon ([mlw:proxy_symbol]
+                                   [introduced] temp___result_187) : bool {
+                                   ((([mlw:proxy_symbol]
+                                       [introduced] temp___result_187)
+                                       = (Ticketmachine__invariant.invariant__
+                                            !Ticketmachine__serving.serving
+                                            !Ticketmachine__next.next)) /\
+                                      (Ticketmachine__invariant.invariant____function_guard
+                                         ([mlw:proxy_symbol]
+                                         [introduced] temp___result_187)
+                                         !Ticketmachine__serving.serving
+                                         !Ticketmachine__next.next))}) = True))
+                                     /\
+                                     ([GP_Pretty_Ada:1004]
+                                     [GP_Sloc:ticketmachine.ads:25:28] (
+                                     (!Ticketmachine__next.next
+                                        = !Ticketmachine__next.next) \/
+                                       (!Ticketmachine__next.next
+                                          = (--pp_tagged NOT IMPLEMENTED + 1))))))) }
+    returns
+     = (* Assume dynamic invariants of inputs of the subprogram ticketmachine.ads:22 *);
+        assume
+        { (Ticketmachine__tickets___axiom.dynamic_invariant
+             !Ticketmachine__serving.serving True False True True) };
+        assume
+        { (Ticketmachine__tickets___axiom.dynamic_invariant
+             !Ticketmachine__next.next True False True True) };
+        assume
+        { (Ticketmachine__tickets___axiom.dynamic_invariant
+             Ticketmachine__returnticket__k.k True False True True) };
+        (* Assume moved pointers in outputs of the subprogram ticketmachine.ads:22 *);
+        (* Check for RTE in the Pre of the subprogram ticketmachine.ads:22 *);
+        abstract ensures
+        { True } begin  (let _ =
+                       ((!Ticketmachine__serving.serving
+                           < !Ticketmachine__next.next) &&
+                          (Ticketmachine__invariant___axiom.invariant__ ()))
+                       in ())  end;
+        (* Assume Pre of the subprogram ticketmachine.ads:22 *);
+        assume
+        { (([GP_Pretty_Ada:992] (!Ticketmachine__serving.serving
+                                   < !Ticketmachine__next.next)) /\
+             ([GP_Pretty_Ada:993] ((epsilon ([mlw:proxy_symbol]
+                                   [introduced] temp___result_186) : bool {
+                                   ((([mlw:proxy_symbol]
+                                       [introduced] temp___result_186)
+                                       = (Ticketmachine__invariant.invariant__
+                                            !Ticketmachine__serving.serving
+                                            !Ticketmachine__next.next)) /\
+                                      (Ticketmachine__invariant.invariant____function_guard
+                                         ([mlw:proxy_symbol]
+                                         [introduced] temp___result_186)
+                                         !Ticketmachine__serving.serving
+                                         !Ticketmachine__next.next))}) = True))) };
+        (let ([mlw:proxy_symbol] [introduced] temp___old_185) =
+        !Ticketmachine__next.next in (try
+        ();
+          ([GP_Sloc:ticketmachine.adb:16:14] ([sloc:ticketmachine.adb:16] ()));
+          ([GP_Sloc:ticketmachine.adb:16:7] ([sloc:ticketmachine.adb:16] 
+                                            (if
+                                            ([sloc:ticketmachine.adb:16] ([branch_id=851]
+                                            _gnatprove_standard.Main.spark__branch
+                                            :=
+                                            (Ticketmachine__returnticket__k.k
+                                               = (!Ticketmachine__next.next
+                                                    - 1))));
+                                            ([branch_id=851] _gnatprove_standard.Main.spark__branch).bool__content
+                                            then
+                                            ();
+                                            ([GP_Sloc:ticketmachine.adb:16:28] 
+                                            ([sloc:ticketmachine.adb:16] ()));
+                                            ([GP_Sloc:ticketmachine.adb:16:36] 
+                                            ([sloc:ticketmachine.adb:16] ()));
+                                            ([GP_Sloc:ticketmachine.adb:16:33] 
+                                            ([sloc:ticketmachine.adb:16] (
+                                            Ticketmachine__next.next :=
+                                            ( ([sloc:ticketmachine.adb:16] 
+                                              ([GP_Shape:if__next_assign__sub]
+                                              [GP_Sloc:ticketmachine.adb:16:41]
+                                              [vc:annotation]
+                                              [GP_Reason:VC_RANGE_CHECK]
+                                              [comment:      if k = next - 1 then next := next - 1; else next := next; end if;                                         ^ ticketmachine.adb:16:41:VC_RANGE_CHECK]
+                                              [GP_Id:4] (Ticketmachine__tickets.range_check_
+                                                           (!Ticketmachine__next.next
+                                                              - 1))))))))
+                                             else
+                                            ();
+                                            ([GP_Sloc:ticketmachine.adb:16:51] 
+                                            ([sloc:ticketmachine.adb:16] ()));
+                                            ([GP_Sloc:ticketmachine.adb:16:59] 
+                                            ([sloc:ticketmachine.adb:16] ()));
+                                            ([GP_Sloc:ticketmachine.adb:16:56] 
+                                            ([sloc:ticketmachine.adb:16] (
+                                            Ticketmachine__next.next :=
+                                            !Ticketmachine__next.next))))));
+          raise Return__exc with | Return__exc  -> ());
+        abstract ensures
+        { True } begin  (let _ =
+                       (_gnatprove_standard.Boolean.andb
+                          (Ticketmachine__invariant___axiom.invariant__ ())
+                          (_gnatprove_standard.Boolean.orb
+                             (!Ticketmachine__next.next
+                                = !Ticketmachine__next.next)
+                             (!Ticketmachine__next.next
+                                = (([mlw:proxy_symbol]
+                                     [introduced] temp___old_185) + 1))))
+                       in ())  end)
+
+end

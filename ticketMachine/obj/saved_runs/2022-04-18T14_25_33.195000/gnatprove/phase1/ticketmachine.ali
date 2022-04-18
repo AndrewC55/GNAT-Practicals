@@ -1,0 +1,43 @@
+V "GNAT Lib v2021"
+A -x
+A ada
+A -gnatA
+A -gnatc
+P GP FX
+
+RN
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+
+U ticketmachine%b	ticketmachine.adb	5f389fc7 OO PK
+
+U ticketmachine%s	ticketmachine.ads	f8e23f45 OO PK
+
+D system.ads		20210520051134 2ffa5114 system%s
+D ticketmachine.ads	20220418132526 f8e23f45 ticketmachine%s
+D ticketmachine.adb	20220418132308 a7daa082 ticketmachine%b
+G a Z
+X 2 ticketmachine.ads
+1K9*TicketMachine 22l5 22e18 3|1b14 15l5 15t18
+4I9*Tickets<short_integer> 5r14 6r11 13r20
+5i4*serving{4I9} 9r8 12r42 18r27 19r13 3|11m7 11r18
+6i4*next{4I9} 9r19 12r27 13r13 18r45 19r23 3|6m7 6r15
+8V13*Invariant{boolean} 14s14 20s14
+11U14*takeTicket 3|4b14 7l8 7t18
+17U14*serveCustomer 3|9b14 12l8 12t21
+
+QQ SPARKVERSION SPARK Community 2021 (20210519)
+GG EK_DIRECT_CALLS ticketmachine__invariant 0
+GG EK_GLOBALS ticketmachine__invariant local FALSE E_FUNCTION FALSE ORIGIN_FLOW 1 ticketmachine proper_proof_in 0 proper_input 2 ticketmachine__serving ticketmachine__next proper_output 0 refined_proof_in 0 refined_input 2 ticketmachine__serving ticketmachine__next refined_output 0 calls_proof 0 calls 0 calls_conditional 0 FALSE FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 2 ticketmachine__serving ticketmachine__next LOCKS 0
+GG EK_DIRECT_CALLS ticketmachine__taketicket 1 ticketmachine__invariant
+GG EK_GLOBALS ticketmachine__taketicket local FALSE E_PROCEDURE FALSE ORIGIN_FLOW 1 ticketmachine proper_proof_in 0 proper_input 2 ticketmachine__serving ticketmachine__next proper_output 1 ticketmachine__next refined_proof_in 0 refined_input 2 ticketmachine__serving ticketmachine__next refined_output 1 ticketmachine__next calls_proof 0 calls 0 calls_conditional 0 FALSE FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 ticketmachine__next LOCKS 0
+GG EK_DIRECT_CALLS ticketmachine__servecustomer 1 ticketmachine__invariant
+GG EK_GLOBALS ticketmachine__servecustomer local FALSE E_PROCEDURE FALSE ORIGIN_FLOW 1 ticketmachine proper_proof_in 0 proper_input 2 ticketmachine__serving ticketmachine__next proper_output 1 ticketmachine__serving refined_proof_in 0 refined_input 2 ticketmachine__serving ticketmachine__next refined_output 1 ticketmachine__serving calls_proof 0 calls 0 calls_conditional 0 FALSE FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 2 ticketmachine__serving ticketmachine__next LOCKS 0
+GG EK_DIRECT_CALLS ticketmachine 0
+GG EK_GLOBALS ticketmachine local FALSE E_PACKAGE TRUE ORIGIN_FLOW 0 proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 initializes 2 ticketmachine__serving ticketmachine__next refined_initializes 2 ticketmachine__serving ticketmachine__next calls_proof 0 calls 0 calls_conditional 0 local_var 2 ticketmachine__serving ticketmachine__next FALSE FALSE FALSE FALSE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_FLOW_SCOPE ticketmachine__servecustomer FALSE FALSE FALSE FALSE TRUE ticketmachine VISIBLE_PART
+GG EK_FLOW_SCOPE ticketmachine TRUE FALSE FALSE FALSE FALSE __standard
+GG EK_FLOW_SCOPE ticketmachine__invariant FALSE FALSE FALSE FALSE TRUE ticketmachine VISIBLE_PART
+GG EK_FLOW_SCOPE ticketmachine__taketicket FALSE FALSE FALSE FALSE TRUE ticketmachine VISIBLE_PART
+GG EK_END_MARKER

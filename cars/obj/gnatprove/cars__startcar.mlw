@@ -1,0 +1,510 @@
+module Cars__key
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type key
+  
+  val function first : int
+    ensures { result = (0 : int) }
+  
+  val function last : int
+    ensures { result = (1 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = key,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type key__ref = { mutable key__content : key }
+  
+  function key__ref_key__content__projection (a: key__ref) : key =
+    a.key__content
+  
+  meta "model_projection" function key__ref_key__content__projection
+  
+  meta "inline:no" function key__ref_key__content__projection
+  
+  val key__havoc (x: key__ref) : unit
+    writes { x }
+end
+
+module Cars__key__rep
+  use Cars__key as Cars__key
+  use _gnatprove_standard.Main
+  use int.Int
+  clone export ada__model.Rep_Proj_Int with
+    axiom .,
+    type t = Cars__key.key,
+    predicate in_range = Cars__key.in_range
+  
+  meta "model_projection" function to_rep
+  
+  meta "inline:no" function to_rep
+end
+
+module Cars__engine
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type engine
+  
+  val function first : int
+    ensures { result = (0 : int) }
+  
+  val function last : int
+    ensures { result = (1 : int) }
+  
+  predicate in_range (x: int) = ((first <= x) /\ (x <= last))
+  
+  val in_range (x: int) : bool
+    ensures { result <-> (in_range (x : int)) }
+  
+  clone export ada__model.Static_Discrete with
+    axiom .,
+    type t = engine,
+    function first = first,
+    function last = last,
+    predicate in_range = in_range
+  
+  type engine__ref = { mutable engine__content : engine }
+  
+  function engine__ref_engine__content__projection (a: engine__ref) : engine =
+    a.engine__content
+  
+  meta "model_projection" function engine__ref_engine__content__projection
+  
+  meta "inline:no" function engine__ref_engine__content__projection
+  
+  val engine__havoc (x: engine__ref) : unit
+    writes { x }
+end
+
+module Cars__engine__rep
+  use Cars__engine as Cars__engine
+  use _gnatprove_standard.Main
+  use int.Int
+  clone export ada__model.Rep_Proj_Int with
+    axiom .,
+    type t = Cars__engine.engine,
+    predicate in_range = Cars__engine.in_range
+  
+  meta "model_projection" function to_rep
+  
+  meta "inline:no" function to_rep
+end
+
+module Cars__car__rep
+  use _gnatprove_standard.Main
+  use int.Int
+  use Cars__key as Cars__key
+  use Cars__key__rep as Cars__key__rep
+  use Cars__engine as Cars__engine
+  use Cars__engine__rep as Cars__engine__rep
+  
+  type __split_fields = {
+                       rec__cars__car__carkey : Cars__key.key;
+                       rec__cars__car__ignition : Cars__engine.engine
+                       }
+  
+  function __split_fields_rec__cars__car__carkey__projection (a: __split_fields) : 
+    Cars__key.key =
+    a.rec__cars__car__carkey
+  
+  meta "model_projection" function __split_fields_rec__cars__car__carkey__projection
+  
+  meta "inline:no" function __split_fields_rec__cars__car__carkey__projection
+  
+  function __split_fields_rec__cars__car__ignition__projection (a: __split_fields) : 
+    Cars__engine.engine =
+    a.rec__cars__car__ignition
+  
+  meta "model_projection" function __split_fields_rec__cars__car__ignition__projection
+  
+  meta "inline:no" function __split_fields_rec__cars__car__ignition__projection
+  
+  type __split_fields__ref = {
+                            mutable __split_fields__content : __split_fields
+                            }
+  
+  function __split_fields__ref___split_fields__content__projection (a: __split_fields__ref) : __split_fields =
+    __split_fields__content a
+  
+  meta "model_projection" function __split_fields__ref___split_fields__content__projection
+  
+  meta "inline:no" function __split_fields__ref___split_fields__content__projection
+  
+  val __split_fields__havoc (x: __split_fields__ref) : unit
+    writes { x }
+  
+  type __rep = { __split_fields : __split_fields }
+  
+  function __rep___split_fields__projection (a: __rep) : __split_fields =
+    __split_fields a
+  
+  meta "model_projection" function __rep___split_fields__projection
+  
+  meta "inline:no" function __rep___split_fields__projection
+  
+  function to_base (a: __rep) : __rep = a
+  
+  val to_base (a: __rep) : __rep
+    ensures { result = (to_base (a : __rep)) }
+  
+  function of_base (a: __rep) : __rep = a
+  
+  val of_base (a: __rep) : __rep
+    ensures { result = (of_base (a : __rep)) }
+  
+  predicate cars__car__carkey__pred (a: __rep) = true
+  
+  val cars__car__carkey__pred (a: __rep) : bool
+    ensures { result <-> (cars__car__carkey__pred (a : __rep)) }
+  
+  val rec__cars__car__carkey_ (a: __rep) : Cars__key.key
+    requires { cars__car__carkey__pred a }
+    ensures { (result = ((__split_fields a).rec__cars__car__carkey)) }
+  
+  predicate cars__car__ignition__pred (a: __rep) = true
+  
+  val cars__car__ignition__pred (a: __rep) : bool
+    ensures { result <-> (cars__car__ignition__pred (a : __rep)) }
+  
+  val rec__cars__car__ignition_ (a: __rep) : Cars__engine.engine
+    requires { cars__car__ignition__pred a }
+    ensures { (result = ((__split_fields a).rec__cars__car__ignition)) }
+  
+  function bool_eq (a: __rep) (b: __rep) : bool =
+    if (((Cars__key__rep.to_rep ((__split_fields a).rec__cars__car__carkey))
+           = (Cars__key__rep.to_rep
+                ((__split_fields b).rec__cars__car__carkey))) /\
+          ((Cars__engine__rep.to_rep
+              ((__split_fields a).rec__cars__car__ignition))
+             = (Cars__engine__rep.to_rep
+                  ((__split_fields b).rec__cars__car__ignition)))) then
+      True
+    else False
+  
+  val bool_eq (a: __rep) (b: __rep) : bool
+    ensures { result = ((bool_eq (a : __rep)) (b : __rep)) }
+end
+
+module Cars__car
+  use export Cars__car__rep
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  
+  type car = __rep
+  
+  val function value__size : int
+  
+  val function object__size : int
+  
+  val function alignment : int
+  
+  axiom value__size_axiom: (value__size >= (0 : int))
+  
+  axiom object__size_axiom: (object__size >= (0 : int))
+  
+  axiom alignment_axiom: (alignment >= (0 : int))
+  
+  val function cars__car__carkey__first__bit : int
+  
+  val function cars__car__carkey__last__bit : int
+  
+  val function cars__car__carkey__position : int
+  
+  axiom cars__car__carkey__first__bit_axiom:
+    (cars__car__carkey__first__bit >= (0 : int))
+  
+  axiom cars__car__carkey__last__bit_axiom:
+    (cars__car__carkey__last__bit > cars__car__carkey__first__bit)
+  
+  axiom cars__car__carkey__position_axiom:
+    (cars__car__carkey__position >= (0 : int))
+  
+  val function cars__car__ignition__first__bit : int
+  
+  val function cars__car__ignition__last__bit : int
+  
+  val function cars__car__ignition__position : int
+  
+  axiom cars__car__ignition__first__bit_axiom:
+    (cars__car__ignition__first__bit >= (0 : int))
+  
+  axiom cars__car__ignition__last__bit_axiom:
+    (cars__car__ignition__last__bit > cars__car__ignition__first__bit)
+  
+  axiom cars__car__ignition__position_axiom:
+    (cars__car__ignition__position >= (0 : int))
+  
+  val function user_eq (a: car) (b: car) : bool
+  
+  val function dummy : car
+  
+  type car__ref = { mutable car__content : car }
+  
+  function car__ref_car__content__projection (a: car__ref) : car =
+    a.car__content
+  
+  meta "model_projection" function car__ref_car__content__projection
+  
+  meta "inline:no" function car__ref_car__content__projection
+  
+  val car__havoc (x: car__ref) : unit
+    writes { x }
+end
+
+module Cars__batmobile
+  use _gnatprove_standard.Main
+  use int.Int
+  use Cars__car as Cars__car
+  
+  val batmobile__split_fields : Cars__car.__split_fields__ref
+end
+
+module Cars__car___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use Cars__car as Cars__car
+  
+  predicate dynamic_invariant (temp___expr_179: Cars__car.car) (temp___is_init_175: bool) (temp___skip_constant_176: bool) (temp___do_toplevel_177: bool) (temp___do_typ_inv_178: bool) =
+    true
+  
+  val dynamic_invariant (temp___expr_179: Cars__car.car) (temp___is_init_175: bool) (temp___skip_constant_176: bool) (temp___do_toplevel_177: bool) (temp___do_typ_inv_178: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_179 : Cars__car.car))
+                      (temp___is_init_175 : bool))
+                     (temp___skip_constant_176 : bool))
+                    (temp___do_toplevel_177 : bool))
+                   (temp___do_typ_inv_178 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_180: Cars__car.car) (temp___skip_top_level_181: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_180: Cars__car.car) (temp___skip_top_level_181: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption
+                    (temp___expr_180 : Cars__car.car))
+                   (temp___skip_top_level_181 : bool)) }
+end
+
+module Cars__key___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Cars__key as Cars__key
+  
+  predicate dynamic_invariant (temp___expr_165: int) (temp___is_init_161: bool) (temp___skip_constant_162: bool) (temp___do_toplevel_163: bool) (temp___do_typ_inv_164: bool) =
+    if ((temp___is_init_161 = True) \/ (Cars__key.first <= Cars__key.last)) then
+      (((Cars__key.dynamic_property Cars__key.first) Cars__key.last)
+         temp___expr_165)
+    else true
+  
+  val dynamic_invariant (temp___expr_165: int) (temp___is_init_161: bool) (temp___skip_constant_162: bool) (temp___do_toplevel_163: bool) (temp___do_typ_inv_164: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_165 : int))
+                      (temp___is_init_161 : bool))
+                     (temp___skip_constant_162 : bool))
+                    (temp___do_toplevel_163 : bool))
+                   (temp___do_typ_inv_164 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_166: int) (temp___skip_top_level_167: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_166: int) (temp___skip_top_level_167: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_166 : int))
+                   (temp___skip_top_level_167 : bool)) }
+end
+
+module Cars__engine___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use Cars__engine as Cars__engine
+  
+  predicate dynamic_invariant (temp___expr_172: int) (temp___is_init_168: bool) (temp___skip_constant_169: bool) (temp___do_toplevel_170: bool) (temp___do_typ_inv_171: bool) =
+    if ((temp___is_init_168 = True) \/
+          (Cars__engine.first <= Cars__engine.last)) then
+      (((Cars__engine.dynamic_property Cars__engine.first) Cars__engine.last)
+         temp___expr_172)
+    else true
+  
+  val dynamic_invariant (temp___expr_172: int) (temp___is_init_168: bool) (temp___skip_constant_169: bool) (temp___do_toplevel_170: bool) (temp___do_typ_inv_171: bool) : 
+    bool
+    ensures { result
+                <->
+                (((((dynamic_invariant (temp___expr_172 : int))
+                      (temp___is_init_168 : bool))
+                     (temp___skip_constant_169 : bool))
+                    (temp___do_toplevel_170 : bool))
+                   (temp___do_typ_inv_171 : bool)) }
+  
+  predicate default_initial_assumption (temp___expr_173: int) (temp___skip_top_level_174: bool) =
+    true
+  
+  val default_initial_assumption (temp___expr_173: int) (temp___skip_top_level_174: bool) : 
+    bool
+    ensures { result
+                <->
+                ((default_initial_assumption (temp___expr_173 : int))
+                   (temp___skip_top_level_174 : bool)) }
+end
+
+module Cars__batmobile___axiom
+  use _gnatprove_standard.Main
+  use int.Int
+end
+
+module Cars__startcar__subprogram_def
+  use _gnatprove_standard.Main
+  use int.Int
+  use int.Int
+  use _gnatprove_standard.Main as Main
+  use Cars__batmobile as Cars__batmobile
+  use Cars__car as Cars__car
+  use Cars__car___axiom as Cars__car___axiom
+  use Cars__key as Cars__key
+  use Cars__key__rep as Cars__key__rep
+  use Cars__engine as Cars__engine
+  use Cars__engine__rep as Cars__engine__rep
+  use Cars__key___axiom as Cars__key___axiom
+  use Cars__engine___axiom as Cars__engine___axiom
+  use Cars__car___axiom as Cars__car___axiom
+  use Cars__batmobile___axiom as Cars__batmobile___axiom
+  
+  let def (__void_param : unit)
+    requires { [#"cars.ads" 14 0 0] true }
+    ensures { [#"cars.ads" 14 0 0]
+              [#"cars.ads" 17 0 0]
+              [@GP_Reason:VC_POSTCONDITION]
+              [@GP_Shape:pragargs__cmp]
+              [@comment:     Post => BatMobile.Ignition = On;              ^ cars.ads:17:14:VC_POSTCONDITION]
+              [@model_vc_post]
+              [@GP_Id:0]
+              [@GP_Sloc:cars.ads:17:14]
+              [@GP_Pretty_Ada:963]
+              [@GP_Sloc:cars.ads:17:14]
+              ((Cars__engine__rep.to_rep
+                  ((Cars__car.__split_fields
+                       { Cars__car.__split_fields =
+                           (Cars__car.__split_fields__content
+                               Cars__batmobile.batmobile__split_fields) }).
+                     Cars__car.rec__cars__car__ignition))
+                 = (0 : int)) }
+  = [@vc:divergent]
+    (([@GNAT-comment:Assume dynamic invariants of inputs of the subprogram cars.ads:14]
+      ());
+     assume {
+       ((((Cars__car___axiom.dynamic_invariant
+             { Cars__car.__split_fields =
+                 (Cars__car.__split_fields__content
+                     Cars__batmobile.batmobile__split_fields) })
+            True)
+           False)
+          True)
+         True };
+     ([@GNAT-comment:Assume moved pointers in outputs of the subprogram cars.ads:14]
+      ());
+     ([@GNAT-comment:Check for RTE in the Pre of the subprogram cars.ads:14]
+      ());
+     (begin
+        ensures { true }
+        let _ =
+          let _ =
+            ((Cars__key__rep.to_rep
+                ((Cars__car.__split_fields
+                     { Cars__car.__split_fields =
+                         (Cars__car.__split_fields__content
+                             Cars__batmobile.batmobile__split_fields) }).
+                   Cars__car.rec__cars__car__carkey))
+               = (0 : int)) in
+          () in
+        ()
+      end);
+     ([@GNAT-comment:Assume Pre of the subprogram cars.ads:14] ());
+     assume {
+       [@GP_Pretty_Ada:951]
+       ((Cars__key__rep.to_rep
+           ((Cars__car.__split_fields
+                { Cars__car.__split_fields =
+                    (Cars__car.__split_fields__content
+                        Cars__batmobile.batmobile__split_fields) }).Cars__car.rec__cars__car__carkey))
+          = (0 : int)) };
+     (try
+        ([@GP_Sloc:cars.adb:5:11] [#"cars.adb" 5 0 0] ());
+        ([@GP_Sloc:cars.adb:5:7]
+         [#"cars.adb" 5 0 0]
+         (if (([#"cars.adb" 5 0 0]
+               [#"cars.adb" 5 0 0]
+               (([@branch_id=825] Main.spark__branch).bool__content <-
+                  ((Cars__key__rep.to_rep
+                      ((Cars__car.__split_fields
+                           { Cars__car.__split_fields =
+                               (Cars__car.__split_fields__content
+                                   Cars__batmobile.batmobile__split_fields) }).
+                         Cars__car.rec__cars__car__carkey))
+                     = (0 : int))));
+              (([@branch_id=825] Main.spark__branch).bool__content)) then
+            (([@GP_Sloc:cars.adb:6:10] [#"cars.adb" 6 0 0] ());
+             ([@GP_Sloc:cars.adb:6:29]
+              [#"cars.adb" 6 0 0]
+              (let temp___187 =
+                 let temp___186 =
+                   { Cars__car.__split_fields =
+                       (Cars__car.__split_fields__content
+                           Cars__batmobile.batmobile__split_fields) } in
+                 ([#"cars.adb" 6 0 0]
+                  (begin
+                     ensures { true }
+                     let _ =
+                       let _ =
+                         (Cars__car.__split_fields temp___186).Cars__car.rec__cars__car__ignition in
+                       () in
+                     ()
+                   end));
+                 ({ temp___186 with
+                    Cars__car.__split_fields =
+                      ({ (Cars__car.__split_fields temp___186) with
+                         Cars__car.rec__cars__car__ignition =
+                           (Cars__engine__rep.of_rep (0 : int)) }) }) in
+               [#"cars.adb" 6 0 0]
+               (Cars__batmobile.batmobile__split_fields.Cars__car.__split_fields__content <-
+                  (Cars__car.__split_fields temp___187)))))
+          else ()));
+        (raise Return__exc)
+      with Return__exc -> ()
+      end);
+     (begin
+        ensures { true }
+        let _ =
+          let _ =
+            ((Cars__engine__rep.to_rep
+                ((Cars__car.__split_fields
+                     { Cars__car.__split_fields =
+                         (Cars__car.__split_fields__content
+                             Cars__batmobile.batmobile__split_fields) }).
+                   Cars__car.rec__cars__car__ignition))
+               = (0 : int)) in
+          () in
+        ()
+      end))
+end

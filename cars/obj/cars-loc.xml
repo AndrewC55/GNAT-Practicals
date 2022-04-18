@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project>
+    <vfs_file />
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\GNAT\Practicals\pigeonHoles\pigeonholes.gpr</vfs_project>
+      <vfs_file>C:\GNAT\Practicals\pigeonHoles\src\main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\GNAT\Practicals\pigeonHoles\pigeonholes.gpr</vfs_project>
+      <vfs_file>C:\GNAT\Practicals\pigeonHoles\src\pigeonHoles.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\GNAT\Practicals\pigeonHoles\pigeonholes.gpr</vfs_project>
+      <vfs_file>C:\GNAT\Practicals\pigeonHoles\src\pigeonHoles.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\GNAT\Practicals\pigeonHoles\pigeonholes.gpr</vfs_project>
+      <vfs_file>C:\GNAT\Practicals\pigeonHoles\src\pigeonHoles.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\GNAT\Practicals\pigeonHoles\pigeonholes.gpr</vfs_project>
+      <vfs_file>C:\GNAT\Practicals\pigeonHoles\src\main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 24" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\machine.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\machine.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\cars.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 10" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\cars.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\main.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 32" line=" 14" >
+      <vfs_project />
+      <vfs_file>C:\GNAT\Practicals\src\main.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

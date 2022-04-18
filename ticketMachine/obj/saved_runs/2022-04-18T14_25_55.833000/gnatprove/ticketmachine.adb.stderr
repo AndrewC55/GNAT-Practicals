@@ -1,0 +1,2 @@
+ticketmachine.ads:14:14: medium: postcondition might fail[#1]
+ticketmachine.ads:18:45: medium: "next" must be a Proof_In as it is only used in assertions (SPARK RM 6.1.4(18))[#0]

@@ -1,0 +1,29 @@
+Summary of SPARK analysis
+=========================
+
+-------------------------------------------------------------------------------------------
+SPARK Analysis results        Total      Flow   CodePeer     Provers   Justified   Unproved
+-------------------------------------------------------------------------------------------
+Data Dependencies                 .         .          .           .           .          .
+Flow Dependencies                 .         .          .           .           .          .
+Initialization                    .         .          .           .           .          .
+Non-Aliasing                      .         .          .           .           .          .
+Run-time Checks                   3         .          .    3 (CVC4)           .          .
+Assertions                        2         .          .    2 (CVC4)           .          .
+Functional Contracts              4         .          .    3 (CVC4)           .          1
+LSP Verification                  .         .          .           .           .          .
+Termination                       1         .          .    1 (CVC4)           .          .
+Concurrency                       .         .          .           .           .          .
+-------------------------------------------------------------------------------------------
+Total                            10         .          .     9 (90%)           .    1 (10%)
+
+
+max steps used for successful proof: 1
+
+Analyzed 1 unit
+in unit pigeonholes, 5 subprograms and packages out of 5 analyzed
+  PigeonHoles at pigeonholes.ads:1 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  PigeonHoles.CountBirds at pigeonholes.ads:11 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (2 checks)
+  PigeonHoles.DoveBeGone at pigeonholes.ads:18 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  PigeonHoles.PigeonBeGone at pigeonholes.ads:8 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (6 checks)
+  PigeonHoles.SubstituteBird at pigeonholes.ads:14 flow analyzed (0 errors, 0 checks and 0 warnings) and not proved, 0 checks out of 1 proved

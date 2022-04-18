@@ -1,0 +1,1 @@
+ticketmachine.ads:12:42: medium: "serving" must be a Proof_In as it is only used in assertions (SPARK RM 6.1.4(18))[#0]

@@ -1,0 +1,2 @@
+ticketmachine.adb:1:14: error: missing body for "returnTicket" declared at ticketmachine.ads:22
+ticketmachine.adb:16:10: error: "k" is undefined

@@ -1,0 +1,7 @@
+20220418133222
+-c
+-x
+ada
+-gnatA
+-gnatc
+-gnates=C:\GNAT\Practicals\ticketMachine\obj\gnatprove\0680dd0d.tmp

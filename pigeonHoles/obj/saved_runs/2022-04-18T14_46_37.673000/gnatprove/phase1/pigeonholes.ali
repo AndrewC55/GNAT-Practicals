@@ -1,0 +1,50 @@
+V "GNAT Lib v2021"
+A -x
+A ada
+A -gnatA
+A -gnatc
+P GP FX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+
+U pigeonholes%b		pigeonholes.adb		8cfdd03c OO PK
+
+U pigeonholes%s		pigeonholes.ads		2bfa1f99 OO PK
+
+D pigeonholes.ads	20220330152718 2bfa1f99 pigeonholes%s
+D pigeonholes.adb	20220418134628 a707cfa5 pigeonholes%b
+D system.ads		20210520051134 2ffa5114 system%s
+G a Z
+X 1 pigeonholes.ads
+1K9*PigeonHoles 16l5 16e16 2|1b14 29l5 29t16
+4E9*Box 4e30 6r43
+4n17*Pigeon{4E9} 9r47 2|12r74 24r18
+4n25*Dove{4E9} 13r47 2|9r20 15r20
+5I9*PH_Index<short_short_integer> 6r30 2|6r13 20r11 21r11
+6A9*PigeonHole(4E9)<5I9> 8r38 12r37 2|4r38 18r37
+8U14*PigeonBeGone 8=27 2|4b14 16l8 16t20
+8a27 d{6A9} 9r28 9r39 2|4b27 6r25 8r19 9m10 12r46 12r66 15m7 15r9
+9i23 J<short_short_integer> 9r41
+12U14*DoveBeGone 12=26 2|18b14 26l8 26t18
+12a26 d{6A9} 13r28 13r39 2|18b26 20r23 21r23 24m10
+13i23 J<short_short_integer> 13r41
+X 2 pigeonholes.adb
+6i7 Pos{1|5I9} 8r13 9r12 11m10 11r17 12r56 13r44
+12i41 J<short_short_integer> 12r68
+20i7 a{1|5I9} 23r16
+21i7 b{1|5I9} 23r19
+23i11 I<short_short_integer> 24r12
+
+QQ SPARKVERSION SPARK Community 2021 (20210519)
+GG EK_DIRECT_CALLS pigeonholes__pigeonbegone 0
+GG EK_GLOBALS pigeonholes__pigeonbegone local FALSE E_PROCEDURE FALSE ORIGIN_FLOW 1 pigeonholes proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 calls_proof 0 calls 0 calls_conditional 0 FALSE FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_DIRECT_CALLS pigeonholes__dovebegone 0
+GG EK_GLOBALS pigeonholes__dovebegone local FALSE E_PROCEDURE FALSE ORIGIN_FLOW 1 pigeonholes proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 calls_proof 0 calls 0 calls_conditional 0 FALSE FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_DIRECT_CALLS pigeonholes 0
+GG EK_GLOBALS pigeonholes local FALSE E_PACKAGE TRUE ORIGIN_FLOW 0 proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 initializes 0 refined_initializes 0 calls_proof 0 calls 0 calls_conditional 0 local_var 0 FALSE FALSE FALSE FALSE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_FLOW_SCOPE pigeonholes__pigeonbegone FALSE FALSE FALSE FALSE TRUE pigeonholes VISIBLE_PART
+GG EK_FLOW_SCOPE pigeonholes__dovebegone FALSE FALSE FALSE FALSE TRUE pigeonholes VISIBLE_PART
+GG EK_FLOW_SCOPE pigeonholes TRUE FALSE FALSE FALSE FALSE __standard
+GG EK_END_MARKER

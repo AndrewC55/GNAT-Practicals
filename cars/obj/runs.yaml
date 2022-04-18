@@ -1,0 +1,54 @@
+'2022-04-18T12:10:36.986000':
+  category: GNATprove
+  files:
+  - C:\GNAT\Practicals\obj\gnatprove
+  label: Basic Prove File
+  output: 'Phase 1 of 2: generation of Global contracts ...
+
+    Phase 2 of 2: flow analysis and proof ...
+
+    Summary logged in C:\GNAT\Practicals\obj\gnatprove\gnatprove.out
+
+    '
+  output_parser: GNATprove_Parser
+  timestamp: '2022-04-18T12:10:36.986000'
+'2022-04-18T12:17:50.839000':
+  category: GNATprove
+  files:
+  - C:\GNAT\Practicals\obj\gnatprove
+  label: Basic Prove File
+  output: 'No parameter given to switch --level
+
+    Try "gnatprove --help" for more information.
+
+    '
+  output_parser: GNATprove_Parser
+  timestamp: '2022-04-18T12:17:50.839000'
+'2022-04-18T12:18:19.565000':
+  category: GNATprove
+  files:
+  - C:\GNAT\Practicals\obj\gnatprove
+  label: Basic Prove File
+  output: 'Phase 1 of 2: generation of Global contracts ...
+
+    Phase 2 of 2: flow analysis and proof ...
+
+    Summary logged in C:\GNAT\Practicals\obj\gnatprove\gnatprove.out
+
+    '
+  output_parser: GNATprove_Parser
+  timestamp: '2022-04-18T12:18:19.565000'
+'2022-04-18T12:24:11.790000':
+  category: GNATprove
+  files:
+  - C:\GNAT\Practicals\obj\gnatprove
+  label: Basic Prove File
+  output: 'Phase 1 of 2: generation of Global contracts ...
+
+    Phase 2 of 2: flow analysis and proof ...
+
+    Summary logged in C:\GNAT\Practicals\obj\gnatprove\gnatprove.out
+
+    '
+  output_parser: GNATprove_Parser
+  timestamp: '2022-04-18T12:24:11.790000'

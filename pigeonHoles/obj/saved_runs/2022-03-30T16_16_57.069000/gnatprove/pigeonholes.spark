@@ -1,0 +1,150 @@
+{
+  "spark": [
+    {
+      "name": "PigeonHoles",
+      "sloc": [
+        {
+          "file": "pigeonholes.ads",
+          "line": 1
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "PigeonHoles.PigeonBeGone",
+      "sloc": [
+        {
+          "file": "pigeonholes.ads",
+          "line": 8
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+  ],
+  "session_map": {
+    " 1": "C:\\GNAT\\Practicals\\pigeonHoles\\obj\\gnatprove\\pigeonholes__pigeonbegone"
+  },
+  "proof": [
+    {
+      "file": "pigeonholes.adb",
+      "line": 10,
+      "col": 54,
+      "rule": "VC_RANGE_CHECK",
+      "severity": "info",
+      "entity": {
+        "name": "PigeonHoles.PigeonBeGone",
+        "sloc": [
+          {
+            "file": "pigeonholes.ads",
+            "line": 8
+          }
+        ]
+      },
+      "check_tree": [
+        {
+          "proof_attempts": {
+            "CVC4": {
+              "result": "Valid",
+              "steps": 1,
+              "time": 2.00000000000000E-02
+            }
+          },
+          "transformations": {
+          }
+        }
+      ],
+      "check_file": "pigeonholes.adb",
+      "check_line": 10,
+      "check_col": 54,
+      "session_dir": 1,
+      "how_proved": "prover",
+      "stats": {
+        "CVC4": {
+          "count": 1,
+          "max_steps": 1,
+          "max_time": 1.99999995529652E-02
+        }
+      }
+    }
+  ],
+  "assumptions": [
+    {
+      "assumptions": [
+      ],
+      "claim": {
+        "predicate": "CLAIM_AORTE",
+        "arg": {
+          "name": "PigeonHoles",
+          "sloc": [
+            {
+              "file": "pigeonholes.ads",
+              "line": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "PigeonHoles.PigeonBeGone",
+          "sloc": [
+            {
+              "file": "pigeonholes.ads",
+              "line": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+      ],
+      "claim": {
+        "predicate": "CLAIM_AORTE",
+        "arg": {
+          "name": "PigeonHoles.PigeonBeGone",
+          "sloc": [
+            {
+              "file": "pigeonholes.ads",
+              "line": 8
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "timings": {
+    "gnatwhy3.transformations.inline_trivial": 0.00000000000000E+00,
+    "codepeer results": 3.50000009348150E-05,
+    "init_why_sections": 5.42699999641627E-04,
+    "gnatwhy3.transformations.detect_polymorphism": 0.00000000000000E+00,
+    "gnatwhy3.transformations.eliminate_literal": 0.00000000000000E+00,
+    "gnatwhy3.run_vcs": 1.09375000000000E-01,
+    "globals (advanced)": 3.34000011207536E-04,
+    "gnatwhy3.transformations.eliminate_algebraic_if_poly": 0.00000000000000E+00,
+    "gnatwhy3.transformations.eliminate_definition_if_poly": 0.00000000000000E+00,
+    "flow analysis": 9.38599987421185E-04,
+    "gnatwhy3.transformations.simplify_formula": 0.00000000000000E+00,
+    "marking": 6.98000003467314E-05,
+    "translation of standard": 3.33400000818074E-03,
+    "properties (advanced)": 1.47000000652042E-05,
+    "gnatwhy3.register_vcs": 0.00000000000000E+00,
+    "gnatwhy3.transformations.eliminate_epsilon": 0.00000000000000E+00,
+    "globals (basic)": 3.37800011038780E-04,
+    "gnatwhy3.schedule_vcs": 0.00000000000000E+00,
+    "gnatwhy3.transformations.prepare_for_counterexmp": 0.00000000000000E+00,
+    "gnatwhy3.save_session": 0.00000000000000E+00,
+    "gnatwhy3.transformations.eliminate_inductive": 0.00000000000000E+00,
+    "gnatwhy3.transformations.encoding_smt_if_poly": 0.00000000000000E+00,
+    "gnatwhy3.transformations.eliminate_unused_hypo": 0.00000000000000E+00,
+    "gnatwhy3.transformations.eliminate_builtin": 0.00000000000000E+00,
+    "gnatwhy3.transformations.discriminate_if_poly": 0.00000000000000E+00,
+    "gnatwhy3.init": 1.71875000000000E-01
+  }
+}

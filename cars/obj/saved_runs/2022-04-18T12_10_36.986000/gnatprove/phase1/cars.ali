@@ -1,0 +1,42 @@
+V "GNAT Lib v2021"
+A -x
+A ada
+A -gnatA
+A -gnatc
+P GP FX
+
+RN
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+
+U cars%b		cars.adb		d484ab2a OO PK
+
+U cars%s		cars.ads		87af1ce7 OO PK
+
+D cars.ads		20220418110924 87af1ce7 cars%s
+D cars.adb		20220418111020 532bb7cd cars%b
+D system.ads		20210520051134 2ffa5114 system%s
+G a Z
+X 1 cars.ads
+1K9*Cars 21l5 21e9 2|1b14 9l5 9t9
+3E9*Key 3e33 8r16
+3n17*Present{3E9} 16r32
+3n26*Absent{3E9} 12r34
+5E9*Engine 5e28 9r18
+5n20*On{5E9} 17r35 2|5r29
+5n24*Off{5E9} 12r54
+7R9*Car 10e14 12r16
+8e7*CarKey{3E9} 12m24 16r23
+9e7*Ignition{5E9} 12m42 17r24 2|5m17
+12r4*BatMobile{7R9} 15r27 16r13 17r14 2|5m7
+14U14*StartCar 2|3b14 6l8 6t16
+
+QQ SPARKVERSION SPARK Community 2021 (20210519)
+GG EK_DIRECT_CALLS cars__startcar 0
+GG EK_GLOBALS cars__startcar local FALSE E_PROCEDURE FALSE ORIGIN_FLOW 1 cars proper_proof_in 0 proper_input 1 cars__batmobile proper_output 1 cars__batmobile refined_proof_in 0 refined_input 1 cars__batmobile refined_output 1 cars__batmobile calls_proof 0 calls 0 calls_conditional 0 FALSE FALSE FALSE TRUE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 1 cars__batmobile LOCKS 0
+GG EK_DIRECT_CALLS cars 0
+GG EK_GLOBALS cars local FALSE E_PACKAGE TRUE ORIGIN_FLOW 0 proper_proof_in 0 proper_input 0 proper_output 0 refined_proof_in 0 refined_input 0 refined_output 0 initializes 1 cars__batmobile refined_initializes 1 cars__batmobile calls_proof 0 calls 0 calls_conditional 0 local_var 1 cars__batmobile FALSE FALSE FALSE FALSE ENTRY_CALLS 0 SUSPENDS_ON 0 UNSYNCH_ACCESSES 0 LOCKS 0
+GG EK_FLOW_SCOPE cars__startcar FALSE FALSE FALSE FALSE TRUE cars VISIBLE_PART
+GG EK_FLOW_SCOPE cars TRUE FALSE FALSE FALSE FALSE __standard
+GG EK_END_MARKER
